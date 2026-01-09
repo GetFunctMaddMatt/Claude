@@ -1,0 +1,37 @@
+{
+  "monitoring": {
+    "servers": [
+      {
+        "name": "Production Server",
+        "host": "192.168.1.100",
+        "checks": {
+          "ping": true,
+          "ports": [22, 80, 443],
+          "http": "https://example.com"
+        }
+      },
+      {
+        "name": "Database Server",
+        "host": "192.168.1.101",
+        "checks": {
+          "ping": true,
+          "ports": [22, 3306, 5432]
+        }
+      }
+    ],
+    "thresholds": {
+      "cpu_percent": 80,
+      "memory_percent": 85,
+      "disk_percent": 90
+    },
+    "alert": {
+      "enabled": true,
+      "methods": ["log", "email"]
+    }
+  },
+  "scanning": {
+    "default_timeout": 1,
+    "max_workers": 50,
+    "common_ports": [21, 22, 23, 25, 80, 110, 143, 443, 445, 3306, 3389, 5432, 8080]
+  }
+}
