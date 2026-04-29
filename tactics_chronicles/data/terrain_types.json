@@ -1,0 +1,59 @@
+{
+  "terrain_types": {
+    "grass":        { "move_cost": 1, "height_default": 0, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": null,         "color": "4a7c59", "label": "Grass" },
+    "road":         { "move_cost": 1, "height_default": 0, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": null,         "color": "8b7355", "label": "Road" },
+    "forest":       { "move_cost": 2, "height_default": 1, "blocks_los": true,  "cover": 20, "conceal": true,  "impassable": false, "hazard": null,         "color": "2d6a4f", "label": "Forest" },
+    "dense_forest": { "move_cost": 3, "height_default": 2, "blocks_los": true,  "cover": 30, "conceal": true,  "impassable": false, "hazard": null,         "color": "1b4332", "label": "Dense Forest" },
+    "tall_grass":   { "move_cost": 1, "height_default": 0, "blocks_los": true,  "cover": 15, "conceal": true,  "impassable": false, "hazard": null,         "color": "588157", "label": "Tall Grass" },
+    "wall":         { "move_cost": 99, "height_default": 3, "blocks_los": true, "cover": 0,  "conceal": false, "impassable": true,  "hazard": null,         "color": "6b705c", "label": "Wall" },
+    "ruins":        { "move_cost": 2, "height_default": 1, "blocks_los": true,  "cover": 25, "conceal": false, "impassable": false, "hazard": null,         "color": "9c9c9c", "label": "Ruins" },
+    "pillar":       { "move_cost": 99, "height_default": 3, "blocks_los": true, "cover": 0,  "conceal": false, "impassable": true,  "hazard": null,         "color": "adb5bd", "label": "Pillar" },
+    "water":        { "move_cost": 3, "height_default": -1, "blocks_los": false,"cover": 0,  "conceal": false, "impassable": false, "hazard": null,         "color": "023e8a", "label": "Shallow Water" },
+    "deep_water":   { "move_cost": 99, "height_default": -2,"blocks_los": false,"cover": 0,  "conceal": false, "impassable": true,  "hazard": null,         "color": "03045e", "label": "Deep Water" },
+    "bridge":       { "move_cost": 1, "height_default": 0, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": null,         "color": "a0522d", "label": "Bridge" },
+    "mud":          { "move_cost": 3, "height_default": 0, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": null,         "color": "6b4f3a", "label": "Mud" },
+    "swamp":        { "move_cost": 3, "height_default": 0, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": "poison",     "color": "606c38", "label": "Swamp" },
+    "sand":         { "move_cost": 2, "height_default": 0, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": null,         "color": "e9c46a", "label": "Sand" },
+    "ice":          { "move_cost": 1, "height_default": 0, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": "slip",       "color": "caf0f8", "label": "Ice" },
+    "lava":         { "move_cost": 99, "height_default": -1,"blocks_los": false,"cover": 0,  "conceal": false, "impassable": true,  "hazard": "lava",       "color": "e63946", "label": "Lava" },
+    "lava_rock":    { "move_cost": 2, "height_default": 0, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": "burn",       "color": "9d0208", "label": "Lava Rock" },
+    "cliff_edge":   { "move_cost": 1, "height_default": 3, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": "fall_risk",  "color": "6c757d", "label": "Cliff Edge" },
+    "stairs":       { "move_cost": 1, "height_default": 1, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": null,         "color": "ced4da", "label": "Stairs", "connects_heights": true },
+    "slope":        { "move_cost": 2, "height_default": 1, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": null,         "color": "868e96", "label": "Slope",  "connects_heights": true },
+    "rooftop":      { "move_cost": 1, "height_default": 3, "blocks_los": false, "cover": 0,  "conceal": false, "impassable": false, "hazard": null,         "color": "c9ada7", "label": "Rooftop" },
+    "hill":         { "move_cost": 2, "height_default": 2, "blocks_los": false, "cover": 5,  "conceal": false, "impassable": false, "hazard": null,         "color": "a7c957", "label": "Hill" }
+  },
+
+  "hazard_definitions": {
+    "poison":    { "trigger": "on_enter",    "effect": "poison",   "duration": 4,  "damage": 0,  "description": "Applies Poison on entry" },
+    "slip":      { "trigger": "on_move",     "effect": "slide",    "chance": 30,   "damage": 0,  "description": "30% chance to slide one extra tile after moving" },
+    "burn":      { "trigger": "on_turn_end", "effect": "damage",   "damage": 8,    "element": "fire", "description": "8 fire damage per turn" },
+    "lava":      { "trigger": "on_enter",    "effect": "damage",   "damage": 30,   "element": "fire", "description": "30 fire damage, also applies Burn" },
+    "fall_risk": { "trigger": "on_knockback","effect": "fall",     "damage_per_h": 12, "description": "Knockback causes fall damage (12 per height tier)" }
+  },
+
+  "height_rules": {
+    "range_bonus_per_tier": 1,
+    "physical_damage_bonus_per_tier": 0.15,
+    "physical_damage_penalty_per_tier": 0.15,
+    "fall_damage_per_tier": 12,
+    "los_blocked_by_terrain_at_same_height": true
+  },
+
+  "cover_rules": {
+    "cover_reduces_hit_chance": true,
+    "cover_is_percentage": true,
+    "melee_ignores_cover": true,
+    "aoe_ignores_cover": false
+  },
+
+  "object_types": {
+    "chest":    { "interactable": true,  "blocks_move": false, "blocks_los": false, "destructible": false, "description": "Contains loot. Walk onto to open." },
+    "barrel":   { "interactable": false, "blocks_move": true,  "blocks_los": false, "destructible": true,  "hp": 20, "description": "Wooden barrel. Provides soft cover. Destroyable." },
+    "crate":    { "interactable": false, "blocks_move": true,  "blocks_los": true,  "destructible": true,  "hp": 30, "description": "Heavy crate. Blocks LOS. Destroyable." },
+    "switch":   { "interactable": true,  "blocks_move": false, "blocks_los": false, "destructible": false, "description": "Activates linked gates or bridges." },
+    "gate":     { "interactable": false, "blocks_move": true,  "blocks_los": true,  "destructible": false, "description": "Impassable until opened by a linked switch." },
+    "trap":     { "interactable": false, "blocks_move": false, "blocks_los": false, "destructible": false, "hidden": true, "description": "Hidden trap. Triggers on enemy step." },
+    "altar":    { "interactable": true,  "blocks_move": false, "blocks_los": false, "destructible": false, "once_per_battle": true, "description": "Step on to receive a blessing." }
+  }
+}
