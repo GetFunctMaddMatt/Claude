@@ -28,6 +28,7 @@ wheels/
 server_monitor.log
 *.json
 !config.example.json
+!tactics_chronicles/**/*.json
 
 # IDE
 .vscode/

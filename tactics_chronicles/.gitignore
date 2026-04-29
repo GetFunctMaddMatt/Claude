@@ -1,0 +1,7 @@
+.godot/
+*.import
+export_credentials.cfg
+*.apk
+*.ipa
+android/
+ios/
