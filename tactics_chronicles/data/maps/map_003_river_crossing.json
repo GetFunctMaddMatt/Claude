@@ -1,0 +1,35 @@
+{
+  "id": "map_003_river_crossing",
+  "name": "Ironford Bridge",
+  "width": 14, "height": 8,
+  "theme": "outdoor_day", "weather": "clear",
+  "tiles": [
+    [{"t":"cliff_edge","h":3},{"t":"cliff_edge","h":3},{"t":"hill","h":2},{"t":"grass","h":1},{"t":"grass","h":0},{"t":"deep_water","h":-2},{"t":"deep_water","h":-2},{"t":"deep_water","h":-2},{"t":"grass","h":0},{"t":"grass","h":1},{"t":"hill","h":2},{"t":"cliff_edge","h":3},{"t":"cliff_edge","h":3},{"t":"cliff_edge","h":3}],
+    [{"t":"cliff_edge","h":3},{"t":"hill","h":2},{"t":"grass","h":1},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"water","h":-1},{"t":"water","h":-1},{"t":"water","h":-1},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":1},{"t":"hill","h":2},{"t":"cliff_edge","h":3},{"t":"cliff_edge","h":3}],
+    [{"t":"hill","h":2},{"t":"grass","h":1},{"t":"grass","h":0},{"t":"ruins","h":1},{"t":"grass","h":0},{"t":"water","h":-1},{"t":"bridge","h":0},{"t":"water","h":-1},{"t":"grass","h":0},{"t":"ruins","h":1},{"t":"grass","h":0},{"t":"grass","h":1},{"t":"hill","h":2},{"t":"cliff_edge","h":3}],
+    [{"t":"grass","h":1},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"road","h":0},{"t":"water","h":-1},{"t":"bridge","h":0},{"t":"water","h":-1},{"t":"road","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"hill","h":2}],
+    [{"t":"grass","h":0},{"t":"grass","h":0},{"t":"tall_grass","h":0},{"t":"grass","h":0},{"t":"road","h":0},{"t":"water","h":-1},{"t":"bridge","h":0},{"t":"water","h":-1},{"t":"road","h":0},{"t":"grass","h":0},{"t":"tall_grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0}],
+    [{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"wall","h":2},{"t":"road","h":0},{"t":"water","h":-1},{"t":"bridge","h":0},{"t":"water","h":-1},{"t":"road","h":0},{"t":"wall","h":2},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0}],
+    [{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"road","h":0},{"t":"water","h":-1},{"t":"water","h":-1},{"t":"water","h":-1},{"t":"road","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0}],
+    [{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0}]
+  ],
+  "objects": [
+    { "pos": [6, 2], "type": "chest", "loot": "iron_shield" },
+    { "pos": [3, 2], "type": "barrel" },
+    { "pos": [10, 2], "type": "barrel" },
+    { "pos": [3, 5], "type": "switch", "links": ["gate_west"] },
+    { "pos": [10, 5], "type": "switch", "links": ["gate_east"] }
+  ],
+  "deployment_zones": [[0,6],[1,6],[2,6],[0,7],[1,7],[2,7],[3,7]],
+  "enemy_squads": [
+    { "pos": [11,1], "job": "knight",  "level": 3, "ai": "defensive",   "name": "Guard Captain" },
+    { "pos": [9,2],  "job": "ranger",  "level": 3, "ai": "ranged_hold", "name": "Crossbowman" },
+    { "pos": [12,2], "job": "ranger",  "level": 3, "ai": "ranged_hold", "name": "Crossbowman" },
+    { "pos": [8,4],  "job": "soldier", "level": 3, "ai": "hold_bridge", "name": "Bridge Guard" },
+    { "pos": [8,3],  "job": "soldier", "level": 3, "ai": "hold_bridge", "name": "Bridge Guard" }
+  ],
+  "win_condition":  "defeat_all",
+  "lose_condition": "party_wiped",
+  "rewards": { "gil": 320, "exp": 220, "items": ["hi_potion", "iron_shield"] },
+  "intro_text": "The only crossing for miles. The enemy knows it too."
+}

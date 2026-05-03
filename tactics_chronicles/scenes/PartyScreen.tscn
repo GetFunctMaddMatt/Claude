@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/PartyScreen.gd" id="1"]
+
+[node name="PartyScreen" type="Control"]
+visible = false
+anchors_preset = 15
+script = ExtResource("1")
+
+[node name="UnitList" type="ItemList" parent="."]
+
+[node name="TabBar" type="TabBar" parent="."]
+
+[node name="StatPanel" type="Control" parent="."]
+
+[node name="SkillPanel" type="Control" parent="."]
+visible = false
+
+[node name="EquipPanel" type="Control" parent="."]
+visible = false
+
+[node name="PrebuildMenu" type="Control" parent="."]
+visible = false
