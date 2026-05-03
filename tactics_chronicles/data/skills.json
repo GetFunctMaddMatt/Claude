@@ -1,0 +1,982 @@
+{
+  "skills": {
+
+    "// ===== TIER 1 =====": {},
+
+    "// --- soldier ---": {},
+    "dual_strike": {
+      "name": "Dual Strike",
+      "class_id": "soldier",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 0,
+      "range": 1,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "physical",
+      "element": "none",
+      "power": 0.75,
+      "effects": [],
+      "description": "Strike the target twice in quick succession, each hit dealing reduced damage."
+    },
+    "war_cry": {
+      "name": "War Cry",
+      "class_id": "soldier",
+      "category": "support",
+      "unlock_level": 2,
+      "mp_cost": 8,
+      "range": 0,
+      "target_pattern": "circle_ally",
+      "target_alignment": "ally",
+      "aoe_radius": 2,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "stat_mod", "stat": "atk", "value": 4, "duration": 3}
+      ],
+      "description": "Let out a rallying cry that temporarily boosts the attack of all nearby allies."
+    },
+    "provoke": {
+      "name": "Provoke",
+      "class_id": "soldier",
+      "category": "active",
+      "unlock_level": 3,
+      "mp_cost": 6,
+      "range": 3,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "status", "id": "taunt", "chance": 90, "duration": 2}
+      ],
+      "description": "Taunt a distant enemy, forcing them to target the soldier for 2 turns."
+    },
+    "// TODO: soldier skills — overwhelm, guard (reaction), hp_up (support), veteran_stance (support), advance (movement)": {},
+
+    "// --- arcanist ---": {},
+    "arcane_bolt": {
+      "name": "Arcane Bolt",
+      "class_id": "arcanist",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 6,
+      "range": 4,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "magical",
+      "element": "none",
+      "power": 1.1,
+      "effects": [],
+      "description": "Hurl a condensed bolt of raw arcane energy at a single target."
+    },
+    "mana_drain": {
+      "name": "Mana Drain",
+      "class_id": "arcanist",
+      "category": "active",
+      "unlock_level": 2,
+      "mp_cost": 4,
+      "range": 3,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "magical",
+      "element": "none",
+      "power": 0.6,
+      "effects": [
+        {"type": "drain_mp", "amount": 15}
+      ],
+      "description": "Siphon magical energy from the target, dealing damage and restoring the caster's MP."
+    },
+    "arcane_burst": {
+      "name": "Arcane Burst",
+      "class_id": "arcanist",
+      "category": "active",
+      "unlock_level": 4,
+      "mp_cost": 18,
+      "range": 4,
+      "target_pattern": "explosion_1",
+      "target_alignment": "enemy",
+      "aoe_radius": 1,
+      "charge_turns": 1,
+      "damage_type": "magical",
+      "element": "none",
+      "power": 1.4,
+      "effects": [],
+      "description": "Channel arcane power for one turn, then unleash a burst that damages all enemies in the blast radius."
+    },
+    "// TODO: arcanist skills — silence_shot, counter_spell (reaction), mp_up (support), focus (support), arcane_step (movement)": {},
+
+    "// ===== TIER 2 =====": {},
+
+    "// --- knight ---": {},
+    "shield_bash": {
+      "name": "Shield Bash",
+      "class_id": "knight",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 5,
+      "range": 1,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "physical",
+      "element": "none",
+      "power": 0.8,
+      "effects": [
+        {"type": "status", "id": "stun", "chance": 60, "duration": 1}
+      ],
+      "description": "Slam the target with your shield, dealing moderate damage with a chance to stun."
+    },
+    "holy_blade": {
+      "name": "Holy Blade",
+      "class_id": "knight",
+      "category": "active",
+      "unlock_level": 3,
+      "mp_cost": 12,
+      "range": 1,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "mixed",
+      "element": "holy",
+      "power": 1.3,
+      "effects": [],
+      "description": "Infuse your blade with holy light and strike, dealing physical and magical holy damage."
+    },
+    "iron_will": {
+      "name": "Iron Will",
+      "class_id": "knight",
+      "category": "support",
+      "unlock_level": 2,
+      "mp_cost": 10,
+      "range": 0,
+      "target_pattern": "self",
+      "target_alignment": "self",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "status", "id": "protect", "chance": 100, "duration": 3},
+        {"type": "status", "id": "shell", "chance": 100, "duration": 3}
+      ],
+      "description": "Steel yourself against both physical and magical harm, gaining Protect and Shell."
+    },
+    "// TODO: knight skills — cover (reaction), sentinel_stance (support), def_up (support), armor_march (movement)": {},
+
+    "// --- ranger ---": {},
+    "aimed_shot": {
+      "name": "Aimed Shot",
+      "class_id": "ranger",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 0,
+      "range": 5,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 1,
+      "damage_type": "physical",
+      "element": "none",
+      "power": 1.6,
+      "effects": [],
+      "description": "Take careful aim for one turn, then loose a powerful shot that deals heavy damage."
+    },
+    "scatter_shot": {
+      "name": "Scatter Shot",
+      "class_id": "ranger",
+      "category": "active",
+      "unlock_level": 2,
+      "mp_cost": 8,
+      "range": 4,
+      "target_pattern": "line_pierce_all",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "physical",
+      "element": "none",
+      "power": 0.85,
+      "effects": [],
+      "description": "Fire a spread of arrows in a line that pierce through every unit in the path."
+    },
+    "snare_trap": {
+      "name": "Snare Trap",
+      "class_id": "ranger",
+      "category": "active",
+      "unlock_level": 3,
+      "mp_cost": 6,
+      "range": 3,
+      "target_pattern": "single",
+      "target_alignment": "any",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "place_trap", "trap_type": "immobilize"}
+      ],
+      "description": "Place a hidden snare trap on a tile; the first unit to step on it becomes immobilized."
+    },
+    "// TODO: ranger skills — quick_shot, evade (reaction), eagle_eye (support), fleet_foot (movement)": {},
+
+    "// --- monk ---": {},
+    "iron_fist": {
+      "name": "Iron Fist",
+      "class_id": "monk",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 0,
+      "range": 1,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "physical",
+      "element": "none",
+      "power": 1.2,
+      "effects": [
+        {"type": "knockback", "distance": 1}
+      ],
+      "description": "Channel power into your fist for a devastating punch that knocks the target back one tile."
+    },
+    "chakra": {
+      "name": "Chakra",
+      "class_id": "monk",
+      "category": "active",
+      "unlock_level": 2,
+      "mp_cost": 10,
+      "range": 0,
+      "target_pattern": "self",
+      "target_alignment": "self",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "heal", "percent_max": 0.25},
+        {"type": "status", "id": "regen", "chance": 100, "duration": 3}
+      ],
+      "description": "Focus inner energy to restore a portion of HP and gain Regen."
+    },
+    "hundred_fists": {
+      "name": "Hundred Fists",
+      "class_id": "monk",
+      "category": "active",
+      "unlock_level": 5,
+      "mp_cost": 20,
+      "range": 1,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "physical",
+      "element": "none",
+      "power": 0.4,
+      "effects": [],
+      "description": "Unleash a rapid flurry of strikes — hits 5 times, each for reduced damage."
+    },
+    "// TODO: monk skills — roundhouse, counter (reaction), inner_strength (support), meditate (support), flash_step (movement)": {},
+
+    "// --- rogue ---": {},
+    "backstab": {
+      "name": "Backstab",
+      "class_id": "rogue",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 0,
+      "range": 1,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "physical",
+      "element": "none",
+      "power": 1.8,
+      "effects": [],
+      "description": "Strike from behind for massive damage. Only deals bonus damage when attacking from the rear."
+    },
+    "smoke_bomb": {
+      "name": "Smoke Bomb",
+      "class_id": "rogue",
+      "category": "active",
+      "unlock_level": 2,
+      "mp_cost": 8,
+      "range": 3,
+      "target_pattern": "explosion_1",
+      "target_alignment": "enemy",
+      "aoe_radius": 1,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "status", "id": "blind", "chance": 80, "duration": 2}
+      ],
+      "description": "Hurl a smoke bomb at a location, blinding all enemies caught in the cloud."
+    },
+    "steal": {
+      "name": "Steal",
+      "class_id": "rogue",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 0,
+      "range": 1,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "drain_mp", "amount": 10}
+      ],
+      "description": "Attempt to steal an item or resource from the target. Also drains a small amount of MP."
+    },
+    "// TODO: rogue skills — shadow_step (movement), pickpocket, vanish (support), opportunist (reaction), caltrops": {},
+
+    "// --- cleric ---": {},
+    "cure": {
+      "name": "Cure",
+      "class_id": "cleric",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 8,
+      "range": 3,
+      "target_pattern": "single",
+      "target_alignment": "ally",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "holy",
+      "power": 0.0,
+      "effects": [
+        {"type": "heal", "flat": 35}
+      ],
+      "description": "Channel holy energy to restore a moderate amount of HP to one ally."
+    },
+    "curaga": {
+      "name": "Curaga",
+      "class_id": "cleric",
+      "category": "active",
+      "unlock_level": 4,
+      "mp_cost": 22,
+      "range": 3,
+      "target_pattern": "circle_ally",
+      "target_alignment": "ally",
+      "aoe_radius": 1,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "holy",
+      "power": 0.0,
+      "effects": [
+        {"type": "heal", "percent_max": 0.40}
+      ],
+      "description": "Radiate healing light around a target point, restoring a large portion of HP to all nearby allies."
+    },
+    "raise": {
+      "name": "Raise",
+      "class_id": "cleric",
+      "category": "active",
+      "unlock_level": 3,
+      "mp_cost": 20,
+      "range": 2,
+      "target_pattern": "single",
+      "target_alignment": "ally",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "holy",
+      "power": 0.0,
+      "effects": [
+        {"type": "revive", "hp_percent": 0.5}
+      ],
+      "description": "Revive a fallen ally, restoring them to 50% of their maximum HP."
+    },
+    "// TODO: cleric skills — protect_spell, shell_spell, holy_strike, faith_barrier (reaction), divine_light (support)": {},
+
+    "// --- elementalist ---": {},
+    "fireball": {
+      "name": "Fireball",
+      "class_id": "elementalist",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 12,
+      "range": 4,
+      "target_pattern": "explosion_1",
+      "target_alignment": "enemy",
+      "aoe_radius": 1,
+      "charge_turns": 0,
+      "damage_type": "magical",
+      "element": "fire",
+      "power": 1.2,
+      "effects": [
+        {"type": "status", "id": "slow", "chance": 30, "duration": 2}
+      ],
+      "description": "Launch a sphere of fire that explodes on impact, burning everything in the blast radius."
+    },
+    "blizzard": {
+      "name": "Blizzard",
+      "class_id": "elementalist",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 12,
+      "range": 4,
+      "target_pattern": "explosion_1",
+      "target_alignment": "enemy",
+      "aoe_radius": 1,
+      "charge_turns": 0,
+      "damage_type": "magical",
+      "element": "ice",
+      "power": 1.1,
+      "effects": [
+        {"type": "status", "id": "immobilize", "chance": 35, "duration": 1}
+      ],
+      "description": "Conjure a burst of freezing ice that may root those caught in the blast."
+    },
+    "thunder": {
+      "name": "Thunder",
+      "class_id": "elementalist",
+      "category": "active",
+      "unlock_level": 2,
+      "mp_cost": 14,
+      "range": 5,
+      "target_pattern": "line_pierce_enemy",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "magical",
+      "element": "lightning",
+      "power": 1.0,
+      "effects": [
+        {"type": "status", "id": "stun", "chance": 25, "duration": 1}
+      ],
+      "description": "Call down a bolt of lightning that strikes in a line through all enemies in its path."
+    },
+    "// TODO: elementalist skills — quake, gale_slash, tidal_wave, elemental_shield (reaction), mana_font (support)": {},
+
+    "// --- time_mage ---": {},
+    "haste": {
+      "name": "Haste",
+      "class_id": "time_mage",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 10,
+      "range": 3,
+      "target_pattern": "single",
+      "target_alignment": "ally",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "status", "id": "haste", "chance": 100, "duration": 3}
+      ],
+      "description": "Accelerate time around an ally, granting them Haste for several turns."
+    },
+    "slow": {
+      "name": "Slow",
+      "class_id": "time_mage",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 10,
+      "range": 4,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "status", "id": "slow", "chance": 85, "duration": 3}
+      ],
+      "description": "Distort time around an enemy, dramatically reducing their speed."
+    },
+    "time_stop": {
+      "name": "Time Stop",
+      "class_id": "time_mage",
+      "category": "active",
+      "unlock_level": 6,
+      "mp_cost": 40,
+      "range": 0,
+      "target_pattern": "all_enemies",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 2,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "status", "id": "stun", "chance": 70, "duration": 2}
+      ],
+      "description": "After a lengthy charge, attempt to stop time for all enemies on the battlefield."
+    },
+    "// TODO: time_mage skills — hastega, stopga, return (movement), temporal_shield (reaction), prescience (support)": {},
+
+    "// --- enchanter ---": {},
+    "empower": {
+      "name": "Empower",
+      "class_id": "enchanter",
+      "category": "support",
+      "unlock_level": 1,
+      "mp_cost": 10,
+      "range": 3,
+      "target_pattern": "single",
+      "target_alignment": "ally",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "stat_mod", "stat": "atk", "value": 6, "duration": 4},
+        {"type": "stat_mod", "stat": "matk", "value": 6, "duration": 4}
+      ],
+      "description": "Enchant an ally's weapon and mind, boosting both physical and magical attack."
+    },
+    "charm": {
+      "name": "Charm",
+      "class_id": "enchanter",
+      "category": "active",
+      "unlock_level": 2,
+      "mp_cost": 14,
+      "range": 4,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "status", "id": "charm", "chance": 65, "duration": 2}
+      ],
+      "description": "Weave a subtle enchantment to charm an enemy, turning them against their allies."
+    },
+    "weaken": {
+      "name": "Weaken",
+      "class_id": "enchanter",
+      "category": "active",
+      "unlock_level": 2,
+      "mp_cost": 10,
+      "range": 4,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "stat_mod", "stat": "def", "value": -4, "duration": 3},
+        {"type": "stat_mod", "stat": "mdef", "value": -4, "duration": 3}
+      ],
+      "description": "Curse an enemy with a weakening hex, reducing both their physical and magical defenses."
+    },
+    "// TODO: enchanter skills — reflect, dispel, mass_empower, enchanted_step (movement), arcane_echo (reaction)": {},
+
+    "// ===== TIER 3 =====": {},
+
+    "// --- paladin ---": {},
+    "divine_judgement": {
+      "name": "Divine Judgement",
+      "class_id": "paladin",
+      "category": "active",
+      "unlock_level": 4,
+      "mp_cost": 20,
+      "range": 1,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 1,
+      "damage_type": "mixed",
+      "element": "holy",
+      "power": 1.8,
+      "effects": [],
+      "description": "Channel divine wrath for one turn, then smite the target with holy power."
+    },
+    "holy_barrier": {
+      "name": "Holy Barrier",
+      "class_id": "paladin",
+      "category": "support",
+      "unlock_level": 2,
+      "mp_cost": 12,
+      "range": 2,
+      "target_pattern": "single",
+      "target_alignment": "ally",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "holy",
+      "power": 0.0,
+      "effects": [
+        {"type": "status", "id": "protect", "chance": 100, "duration": 3},
+        {"type": "status", "id": "regen", "chance": 100, "duration": 3}
+      ],
+      "description": "Envelop an ally in a holy aura that grants both Protect and Regen."
+    },
+    "sacrifice": {
+      "name": "Sacrifice",
+      "class_id": "paladin",
+      "category": "active",
+      "unlock_level": 5,
+      "mp_cost": 0,
+      "range": 1,
+      "target_pattern": "single",
+      "target_alignment": "ally",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "holy",
+      "power": 0.0,
+      "effects": [
+        {"type": "drain_hp", "percent_damage": 0.5},
+        {"type": "revive", "hp_percent": 0.75}
+      ],
+      "description": "Sacrifice half of your current HP to revive a fallen ally at 75% health."
+    },
+    "// TODO: paladin skills — aura_of_valor (support), crusader_strike, divine_retribution (reaction), holy_charge (movement)": {},
+
+    "// --- assassin ---": {},
+    "shadow_strike": {
+      "name": "Shadow Strike",
+      "class_id": "assassin",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 8,
+      "range": 1,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "physical",
+      "element": "dark",
+      "power": 1.5,
+      "effects": [
+        {"type": "status", "id": "poison", "chance": 50, "duration": 3}
+      ],
+      "description": "A precise dark-infused strike that poisons the target on hit."
+    },
+    "death_mark": {
+      "name": "Death Mark",
+      "class_id": "assassin",
+      "category": "active",
+      "unlock_level": 3,
+      "mp_cost": 12,
+      "range": 4,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "dark",
+      "power": 0.0,
+      "effects": [
+        {"type": "stat_mod", "stat": "def", "value": -6, "duration": -1},
+        {"type": "stat_mod", "stat": "mdef", "value": -6, "duration": -1}
+      ],
+      "description": "Mark a target for death, permanently reducing their defenses until the mark is cleansed."
+    },
+    "vanishing_act": {
+      "name": "Vanishing Act",
+      "class_id": "assassin",
+      "category": "movement",
+      "unlock_level": 2,
+      "mp_cost": 10,
+      "range": 3,
+      "target_pattern": "self",
+      "target_alignment": "self",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "status", "id": "invisible", "chance": 100, "duration": 2}
+      ],
+      "description": "Slip into the shadows and teleport up to 3 tiles, becoming invisible for 2 turns."
+    },
+    "// TODO: assassin skills — thousand_cuts, nerve_strike, shadow_blend (support), counter_kill (reaction)": {},
+
+    "// --- berserker ---": {},
+    "wild_swing": {
+      "name": "Wild Swing",
+      "class_id": "berserker",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 0,
+      "range": 1,
+      "target_pattern": "explosion_1",
+      "target_alignment": "any",
+      "aoe_radius": 1,
+      "charge_turns": 0,
+      "damage_type": "physical",
+      "element": "none",
+      "power": 1.1,
+      "effects": [],
+      "description": "Swing recklessly, hitting all adjacent units — friend and foe alike."
+    },
+    "blood_rage": {
+      "name": "Blood Rage",
+      "class_id": "berserker",
+      "category": "support",
+      "unlock_level": 2,
+      "mp_cost": 6,
+      "range": 0,
+      "target_pattern": "self",
+      "target_alignment": "self",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "status", "id": "berserk", "chance": 100, "duration": 3},
+        {"type": "self_buff", "stat": "atk", "value": 10, "duration": 3}
+      ],
+      "description": "Enter a frenzied rage that massively boosts attack but forces uncontrolled aggression."
+    },
+    "earthquake_slam": {
+      "name": "Earthquake Slam",
+      "class_id": "berserker",
+      "category": "active",
+      "unlock_level": 4,
+      "mp_cost": 15,
+      "range": 1,
+      "target_pattern": "circle_enemy",
+      "target_alignment": "enemy",
+      "aoe_radius": 2,
+      "charge_turns": 1,
+      "damage_type": "physical",
+      "element": "earth",
+      "power": 1.5,
+      "effects": [
+        {"type": "status", "id": "immobilize", "chance": 40, "duration": 1}
+      ],
+      "description": "Slam the ground with tremendous force, shaking the earth in a wide radius around the berserker."
+    },
+    "// TODO: berserker skills — brutal_charge (movement), retaliate (reaction), savage_heart (support), war_frenzy": {},
+
+    "// --- summoner ---": {},
+    "summon_ifrit": {
+      "name": "Summon: Ifrit",
+      "class_id": "summoner",
+      "category": "active",
+      "unlock_level": 2,
+      "mp_cost": 25,
+      "range": 0,
+      "target_pattern": "all_enemies",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 1,
+      "damage_type": "magical",
+      "element": "fire",
+      "power": 1.4,
+      "effects": [
+        {"type": "status", "id": "slow", "chance": 30, "duration": 2}
+      ],
+      "description": "Summon the fire spirit Ifrit, who scorches all enemies with hellfire."
+    },
+    "summon_shiva": {
+      "name": "Summon: Shiva",
+      "class_id": "summoner",
+      "category": "active",
+      "unlock_level": 2,
+      "mp_cost": 25,
+      "range": 0,
+      "target_pattern": "all_enemies",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 1,
+      "damage_type": "magical",
+      "element": "ice",
+      "power": 1.3,
+      "effects": [
+        {"type": "status", "id": "immobilize", "chance": 40, "duration": 2}
+      ],
+      "description": "Summon the ice spirit Shiva, who freezes the battlefield and roots all enemies."
+    },
+    "eidolon_bond": {
+      "name": "Eidolon Bond",
+      "class_id": "summoner",
+      "category": "support",
+      "unlock_level": 1,
+      "mp_cost": 12,
+      "range": 0,
+      "target_pattern": "self",
+      "target_alignment": "self",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "stat_mod", "stat": "matk", "value": 5, "duration": 4}
+      ],
+      "description": "Strengthen the bond with your eidolons, boosting the power of all summon magic."
+    },
+    "// TODO: summoner skills — summon_ramuh, summon_carbuncle, spirit_guard (reaction), eidolon_step (movement)": {},
+
+    "// --- archmage ---": {},
+    "meteor": {
+      "name": "Meteor",
+      "class_id": "archmage",
+      "category": "active",
+      "unlock_level": 6,
+      "mp_cost": 40,
+      "range": 5,
+      "target_pattern": "explosion_2",
+      "target_alignment": "enemy",
+      "aoe_radius": 2,
+      "charge_turns": 2,
+      "damage_type": "magical",
+      "element": "none",
+      "power": 2.5,
+      "effects": [],
+      "description": "Draw down a meteor from the heavens after a long charge. Devastates everything in a massive blast."
+    },
+    "arcane_nova": {
+      "name": "Arcane Nova",
+      "class_id": "archmage",
+      "category": "active",
+      "unlock_level": 4,
+      "mp_cost": 28,
+      "range": 0,
+      "target_pattern": "circle_enemy",
+      "target_alignment": "enemy",
+      "aoe_radius": 3,
+      "charge_turns": 1,
+      "damage_type": "magical",
+      "element": "none",
+      "power": 1.6,
+      "effects": [],
+      "description": "Release a nova of pure arcane force in all directions, blasting every nearby enemy."
+    },
+    "mana_void": {
+      "name": "Mana Void",
+      "class_id": "archmage",
+      "category": "active",
+      "unlock_level": 5,
+      "mp_cost": 20,
+      "range": 4,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "magical",
+      "element": "none",
+      "power": 0.0,
+      "effects": [
+        {"type": "status", "id": "silence", "chance": 75, "duration": 3},
+        {"type": "drain_mp", "amount": 30}
+      ],
+      "description": "Create a void that tears the mana from a target, silencing them and draining their MP."
+    },
+    "// TODO: archmage skills — flare, ultima, magic_absorption (reaction), ley_stride (movement), grand_enchantment (support)": {},
+
+    "// --- shadow ---": {},
+    "void_slash": {
+      "name": "Void Slash",
+      "class_id": "shadow",
+      "category": "active",
+      "unlock_level": 1,
+      "mp_cost": 10,
+      "range": 2,
+      "target_pattern": "line_pierce_enemy",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "mixed",
+      "element": "dark",
+      "power": 1.3,
+      "effects": [
+        {"type": "status", "id": "blind", "chance": 40, "duration": 2}
+      ],
+      "description": "Slash through space itself with dark energy, piercing enemies in a line and blinding them."
+    },
+    "life_drain": {
+      "name": "Life Drain",
+      "class_id": "shadow",
+      "category": "active",
+      "unlock_level": 2,
+      "mp_cost": 14,
+      "range": 3,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "magical",
+      "element": "dark",
+      "power": 1.0,
+      "effects": [
+        {"type": "drain_hp", "percent_damage": 0.5}
+      ],
+      "description": "Drain the life force from a target, dealing dark damage and restoring 50% of damage dealt as HP."
+    },
+    "dimensional_shift": {
+      "name": "Dimensional Shift",
+      "class_id": "shadow",
+      "category": "movement",
+      "unlock_level": 3,
+      "mp_cost": 12,
+      "range": 4,
+      "target_pattern": "single",
+      "target_alignment": "enemy",
+      "aoe_radius": 0,
+      "charge_turns": 0,
+      "damage_type": "none",
+      "element": "dark",
+      "power": 0.0,
+      "effects": [
+        {"type": "teleport_adjacent_to_target"}
+      ],
+      "description": "Tear through shadow-space to instantly appear adjacent to any target within range."
+    },
+    "// TODO: shadow skills — dark_pulse, oblivion, shadow_meld (support), void_counter (reaction)": {}
+
+  },
+
+  "prebuilds": {
+    "soldier": {
+      "standard": {
+        "name": "Standard Soldier",
+        "description": "Balanced offense and survival.",
+        "active_skills": ["dual_strike", "war_cry", "provoke", "overwhelm"],
+        "reaction": "guard",
+        "supports": ["hp_up", "veteran_stance"],
+        "movement": "advance"
+      },
+      "// TODO: soldier prebuilds — aggressor, defender": {}
+    },
+    "cleric": {
+      "healer": {
+        "name": "Pure Healer",
+        "description": "Dedicated support build focused on keeping allies alive.",
+        "active_skills": ["cure", "curaga", "raise", "protect_spell"],
+        "reaction": "faith_barrier",
+        "supports": ["mp_up", "divine_light"],
+        "movement": "swift_grace"
+      },
+      "// TODO: cleric prebuilds — battle_cleric, buffer": {}
+    },
+    "// TODO: prebuilds for all other classes — knight, ranger, monk, rogue, elementalist, time_mage, enchanter, paladin, assassin, berserker, summoner, archmage, shadow": {}
+  }
+}
