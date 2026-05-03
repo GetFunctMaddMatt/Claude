@@ -8,11 +8,19 @@ enum State { IDLE, DEPLOY, PLAYER_TURN, AI_TURN, ANIMATING, VICTORY, DEFEAT }
 @export var grid:            BattleGrid
 @export var turn_manager:    TurnManager
 @export var action_resolver: ActionResolver
+@export var ai_controller:   AIController
+@export var input_handler:   InputHandler
+@export var grid_renderer:   GridRenderer
+@export var camera:          CameraController
+@export var hud:             BattleHUD
+@export var job_system:      JobSystem
+@export var post_battle:     PostBattleScreen
 
-var player_units: Array = []
-var enemy_units:  Array = []
-var map_data:     Dictionary = {}
-var state:        State = State.IDLE
+var player_units:  Array = []
+var enemy_units:   Array = []
+var _enemy_modes:  Dictionary = {}   # Unit -> ai_mode string
+var map_data:      Dictionary = {}
+var state:         State = State.IDLE
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Battle start
@@ -30,6 +38,7 @@ func start_battle(map_id: String) -> void:
 
 	turn_manager.initialize(player_units + enemy_units)
 	_connect_signals()
+	_wire_subsystems()
 
 	_set_state(State.DEPLOY)
 	EventBus.battle_started.emit(map_id)
@@ -70,6 +79,7 @@ func player_skill(unit: Unit, skill_id: String, target_pos: Vector2i) -> void:
 	unit.has_acted = true
 	EventBus.skill_used.emit(unit, skill_id, target_pos)
 	EventBus.skill_resolved.emit(results)
+	_spawn_floating_results(results)
 	_set_state(State.PLAYER_TURN)
 	_check_turn_done(unit)
 
@@ -90,7 +100,12 @@ func player_end_turn(_unit: Unit) -> void:
 
 func _run_ai_turn(unit: Unit) -> void:
 	_set_state(State.AI_TURN)
-	# Simple AI: move toward nearest player unit, attack with best skill
+	var mode = _enemy_modes.get(unit, "aggressive")
+	if ai_controller:
+		ai_controller.run(unit, mode, self)
+		_end_current_turn()
+		return
+	# Fallback if ai_controller not wired
 	var nearest = _nearest_player_unit(unit)
 	if nearest == null:
 		_end_current_turn()
@@ -185,6 +200,24 @@ func _apply_results(results: Array) -> void:
 		if target.is_ko:
 			_on_unit_ko(target)
 
+func _spawn_floating_results(results: Array) -> void:
+	if grid_renderer == null: return
+	for r in results:
+		var target: Unit = r["unit"]
+		var world_pos = grid_renderer.grid_to_screen_center(target.grid_pos)
+		if r.get("miss", false):
+			FloatingText.miss(grid_renderer, world_pos)
+		else:
+			if r["damage"] > 0:
+				FloatingText.damage(grid_renderer, world_pos,
+					r["damage"], r["element"], r.get("crit", false))
+			if r["healing"] > 0:
+				FloatingText.heal(grid_renderer, world_pos, r["healing"])
+			for sa in r.get("statuses_applied", []):
+				FloatingText.status(grid_renderer, world_pos, sa["id"])
+			if r.get("ko", false):
+				FloatingText.ko(grid_renderer, world_pos)
+
 func _use_item(unit: Unit, item_id: String, target_pos: Vector2i) -> void:
 	var item   = DataManager.get_item(item_id)
 	var effect = item.get("use_effect", null)
@@ -237,12 +270,15 @@ func _check_victory() -> void:
 	var lose = map_data.get("lose_condition", "party_wiped")
 	var all_enemies_ko  = enemy_units.all(func(u: Unit):  return u.is_ko)
 	var all_players_ko  = player_units.all(func(u: Unit): return u.is_ko)
-	if lose == "party_wiped"  and all_players_ko:
+	if lose == "party_wiped" and all_players_ko:
 		_set_state(State.DEFEAT)
 		EventBus.battle_ended.emit("defeat")
-	elif win == "defeat_all"  and all_enemies_ko:
+		if post_battle:
+			post_battle.show_results(false, {}, [], func(): get_tree().change_scene_to_file("res://scenes/Overworld.tscn"))
+	elif win == "defeat_all" and all_enemies_ko:
 		_set_state(State.VICTORY)
 		EventBus.battle_ended.emit("victory")
+		_handle_victory()
 
 func _on_unit_ko(unit: Unit) -> void:
 	turn_manager.on_unit_ko(unit)
@@ -275,15 +311,46 @@ func _spawn_enemy_units() -> void:
 		add_child(unit)
 		var p = edef.get("pos", [0, 0])
 		grid.place_unit(unit, Vector2i(p[0], p[1]))
+		_enemy_modes[unit] = edef.get("ai", "aggressive")
 		enemy_units.append(unit)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Helpers
 # ─────────────────────────────────────────────────────────────────────────────
 
+func _handle_victory() -> void:
+	var rewards = map_data.get("rewards", {})
+	GameState.add_gil(rewards.get("gil", 0))
+	for iid in rewards.get("items", []):
+		GameState.add_item(iid)
+	var unit_results: Array = []
+	if job_system:
+		unit_results = job_system.award_battle_rewards(player_units, map_data)
+	GameState.mark_battle_complete(map_data.get("id", ""))
+	SaveManager.autosave()
+	if post_battle:
+		post_battle.show_results(true, rewards, unit_results,
+			func(): get_tree().change_scene_to_file("res://scenes/Overworld.tscn"))
+
 func _set_state(s: State) -> void:
 	state = s
 	EventBus.battle_state_changed.emit(State.keys()[s])
+
+func _wire_subsystems() -> void:
+	if input_handler:
+		input_handler.battle_engine = self
+		input_handler.grid_renderer = grid_renderer
+		input_handler.hud           = hud
+	if grid_renderer:
+		grid_renderer.grid = grid
+		grid_renderer.queue_redraw()
+	if camera and grid_renderer:
+		camera.set_grid_bounds(grid_renderer.total_size())
+	if hud:
+		hud.battle_engine = self
+	EventBus.turn_started.connect(func(u: Unit):
+		if camera and grid_renderer:
+			camera.snap_to(grid_renderer.grid_to_screen_center(u.grid_pos)))
 
 func _connect_signals() -> void:
 	EventBus.unit_ko.connect(_on_unit_ko)

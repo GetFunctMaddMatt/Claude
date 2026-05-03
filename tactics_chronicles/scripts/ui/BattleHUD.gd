@@ -12,8 +12,9 @@ extends CanvasLayer
 @onready var momentum_bar:   ProgressBar   = $MomentumBar
 @onready var surge_btn:      Button        = $SurgeBtn
 
-var battle_engine: BattleEngine
-var selected_unit: Unit = null
+var battle_engine:  BattleEngine
+var input_handler:  InputHandler
+var selected_unit:  Unit = null
 
 func _ready() -> void:
 	_connect_signals()
@@ -86,18 +87,50 @@ func _on_tile_selected(pos: Vector2i) -> void:
 # ─────────────────────────────────────────────────────────────────────────────
 
 func _refresh_unit_panel(unit: Unit) -> void:
-	# TODO: fill in labels/bars from unit stats
-	# unit_panel/NameLabel.text = unit.unit_name
-	# unit_panel/HPBar.value    = unit.hp  etc.
-	pass
+	# Labels are added dynamically since the panel starts empty.
+	# Find or create children by name.
+	_set_panel_label("NameLabel",  "%s  Lv%d" % [unit.unit_name, unit.level])
+	_set_panel_label("ClassLabel", unit.class_id.capitalize())
+	_set_panel_label("HPLabel",    "HP %d / %d" % [unit.hp, unit.max_hp])
+	_set_panel_label("MPLabel",    "MP %d / %d" % [unit.mp, unit.max_mp])
+	var statuses = " ".join(unit.statuses.keys().map(func(s): return s.left(3).to_upper()))
+	_set_panel_label("StatusLabel", statuses)
+
+func _set_panel_label(node_name: String, text: String) -> void:
+	var lbl = unit_panel.get_node_or_null(node_name)
+	if lbl == null:
+		lbl      = Label.new()
+		lbl.name = node_name
+		unit_panel.add_child(lbl)
+	lbl.text = text
 
 func _refresh_unit_panel_if_selected(unit: Unit) -> void:
 	if unit == selected_unit:
 		_refresh_unit_panel(unit)
 
 func _refresh_skill_menu(unit: Unit) -> void:
-	# TODO: populate skill buttons from unit.get_active_skills()
-	pass
+	for child in skill_menu.get_children():
+		child.queue_free()
+	for sk_id in unit.get_active_skills():
+		var sk = DataManager.get_skill(sk_id)
+		if sk.is_empty(): continue
+		var btn        = Button.new()
+		var mp_cost    = sk.get("mp_cost", 0)
+		var can_use    = unit.can_use_skill(sk_id)
+		btn.text       = "%s  [%d MP]" % [sk.get("name", sk_id), mp_cost]
+		btn.disabled   = not can_use
+		btn.tooltip_text = sk.get("description", "")
+		btn.pressed.connect(_on_skill_btn_pressed.bind(sk_id))
+		skill_menu.add_child(btn)
+	skill_menu.visible = true
+
+func _on_skill_btn_pressed(sk_id: String) -> void:
+	if input_handler:
+		input_handler.begin_skill_targeting(sk_id)
+	elif battle_engine:
+		# Fallback: direct call if input_handler not wired
+		var ih = battle_engine.input_handler
+		if ih: ih.begin_skill_targeting(sk_id)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Buttons
