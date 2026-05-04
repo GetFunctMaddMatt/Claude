@@ -1,10 +1,10 @@
 extends Control
 ## Main menu: New Game, Continue, Settings, Quit.
 
-@onready var new_game_btn:  Button  = $VBox/NewGameBtn
-@onready var continue_btn:  Button  = $VBox/ContinueBtn
-@onready var settings_btn:  Button  = $VBox/SettingsBtn
-@onready var quit_btn:      Button  = $VBox/QuitBtn
+@onready var new_game_btn:  Button  = $Center/VBox/NewGameBtn
+@onready var continue_btn:  Button  = $Center/VBox/ContinueBtn
+@onready var settings_btn:  Button  = $Center/VBox/SettingsBtn
+@onready var quit_btn:      Button  = $Center/VBox/QuitBtn
 @onready var save_select:   Control = $SaveSelect
 @onready var version_label: Label   = $VersionLabel
 
