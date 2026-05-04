@@ -21,7 +21,7 @@ var skill_tiles:   Array    = []
 var hovered_tile:  Vector2i = Vector2i(-1, -1)
 var selected_tile: Vector2i = Vector2i(-1, -1)
 
-# Cached terrain colors (hex string → Color)
+# Cached terrain colors (hex string -> Color)
 var _terrain_colors: Dictionary = {}
 
 func _ready() -> void:
@@ -38,9 +38,9 @@ func _cache_terrain_colors() -> void:
 		var hex = types[tid].get("color", "888888")
 		_terrain_colors[tid] = Color("#" + hex)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Drawing
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _draw() -> void:
 	if grid == null: return
@@ -139,9 +139,9 @@ func _draw_objects() -> void:
 			"trap":
 				draw_circle(rect.get_center(), 6, Color(0.8, 0.2, 0.8, 0.5))
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Coordinate helpers
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _tile_rect(pos: Vector2i) -> Rect2:
 	return Rect2(pos.x * TILE_W, pos.y * TILE_H, TILE_W, TILE_H)

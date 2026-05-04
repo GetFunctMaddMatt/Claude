@@ -36,7 +36,7 @@ func _load_json(path: String) -> Dictionary:
 		return {}
 	return parsed
 
-# ── Accessors ─────────────────────────────────────────────────────────────────
+# -- Accessors -----------------------------------------------------------------
 
 func get_class(class_id: String) -> Dictionary:
 	return classes.get(class_id, {})

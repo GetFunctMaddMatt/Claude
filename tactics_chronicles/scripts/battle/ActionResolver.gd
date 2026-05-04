@@ -1,7 +1,7 @@
 class_name ActionResolver
 extends Node
 ## Resolves skill use into a list of result dicts.
-## Pure logic — no scene nodes, no animations. BattleEngine applies results.
+## Pure logic -- no scene nodes, no animations. BattleEngine applies results.
 ##
 ## Result dict shape:
 ##   { unit, damage, healing, mp_drain, statuses_applied, statuses_removed,
@@ -49,9 +49,9 @@ func resolve_skill(attacker: Unit, skill_id: String,
 		results.append(_apply_to_unit(attacker, target, skill, grid))
 	return results
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Per-target resolution
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _apply_to_unit(attacker: Unit, target: Unit,
 		skill: Dictionary, grid: BattleGrid) -> Dictionary:
@@ -93,9 +93,9 @@ func _apply_to_unit(attacker: Unit, target: Unit,
 
 	return result
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Damage formulas
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _calc_physical(attacker: Unit, target: Unit, power: float,
 		grid: BattleGrid, is_crit: bool) -> int:
@@ -124,9 +124,9 @@ func _element_multiplier(element: String, target: Unit) -> float:
 	if element == "holy" and target.has_status("zombie"): return 2.0
 	return 1.0
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Effect application
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _apply_effect(attacker: Unit, target: Unit,
 		eff: Dictionary, result: Dictionary) -> void:
@@ -164,9 +164,9 @@ func _apply_effect(attacker: Unit, target: Unit,
 		"place_trap":
 			pass  # BattleEngine places object on grid
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Hit / crit rolls
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _roll_hit(attacker: Unit, target: Unit,
 		skill: Dictionary, grid: BattleGrid) -> bool:
@@ -184,9 +184,9 @@ func _roll_crit(attacker: Unit) -> bool:
 func _roll(percent: int) -> bool:
 	return randi() % 100 < percent
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # LOS
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _check_los(attacker: Unit, target: Unit, grid: BattleGrid) -> bool:
 	var sk = DataManager.get_skill("")  # called with actual skill in full impl

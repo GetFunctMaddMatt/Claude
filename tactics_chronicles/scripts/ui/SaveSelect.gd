@@ -1,6 +1,6 @@
 class_name SaveSelect
 extends Control
-## Save slot selection screen — used for both New Game (pick slot) and Continue (pick save).
+## Save slot selection screen -- used for both New Game (pick slot) and Continue (pick save).
 
 enum Mode { NEW_GAME, LOAD }
 
@@ -42,16 +42,16 @@ func _build_slots() -> void:
 		if _mode == Mode.LOAD:
 			if not info.get("exists", false):
 				btn.disabled = true
-				btn.text = "Slot %d — Empty" % i
+				btn.text = "Slot %d -- Empty" % i
 			else:
 				var ts  = info.get("timestamp", 0)
 				var dt  = Time.get_datetime_string_from_unix_time(int(ts))
-				btn.text = "Slot %d — %s  (%s)" % [i, info.get("chapter", "?"), dt]
+				btn.text = "Slot %d -- %s  (%s)" % [i, info.get("chapter", "?"), dt]
 		else:
 			if info.get("exists", false):
-				btn.text = "Slot %d — Overwrite save" % i
+				btn.text = "Slot %d -- Overwrite save" % i
 			else:
-				btn.text = "Slot %d — Empty" % i
+				btn.text = "Slot %d -- Empty" % i
 
 		btn.pressed.connect(_on_slot_pressed.bind(i))
 		slots_vbox.add_child(btn)

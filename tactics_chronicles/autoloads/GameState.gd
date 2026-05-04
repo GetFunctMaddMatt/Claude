@@ -2,11 +2,11 @@ extends Node
 ## Global mutable game state. Persisted by SaveManager.
 ## Battle-scoped data lives in BattleEngine, not here.
 
-# ── Persistent state ──────────────────────────────────────────────────────────
+# -- Persistent state ----------------------------------------------------------
 var current_chapter: String     = "ch01"
 var current_node:    String     = ""
 
-# ── Transient (not saved) ─────────────────────────────────────────────────────
+# -- Transient (not saved) -----------------------------------------------------
 var pending_map_id:  String     = ""   # set by Overworld before switching to Battle
 var party:           Array      = []   # Array of unit save dicts
 var gil:             int        = 500
@@ -15,7 +15,7 @@ var unlocked_classes: Array     = ["soldier", "arcanist"]
 var completed_battles: Array    = []
 var story_flags:     Dictionary = {}
 
-# ── Gil ───────────────────────────────────────────────────────────────────────
+# -- Gil -----------------------------------------------------------------------
 
 func add_gil(amount: int) -> void:
 	gil += amount
@@ -28,7 +28,7 @@ func spend_gil(amount: int) -> bool:
 	EventBus.gil_changed.emit(gil, -amount)
 	return true
 
-# ── Inventory ─────────────────────────────────────────────────────────────────
+# -- Inventory -----------------------------------------------------------------
 
 func add_item(item_id: String, qty: int = 1) -> void:
 	inventory[item_id] = inventory.get(item_id, 0) + qty
@@ -48,7 +48,7 @@ func item_count(item_id: String) -> int:
 func has_item(item_id: String) -> bool:
 	return item_count(item_id) > 0
 
-# ── Classes ───────────────────────────────────────────────────────────────────
+# -- Classes -------------------------------------------------------------------
 
 func unlock_class(class_id: String) -> void:
 	if class_id not in unlocked_classes:
@@ -57,7 +57,7 @@ func unlock_class(class_id: String) -> void:
 func is_class_unlocked(class_id: String) -> bool:
 	return class_id in unlocked_classes
 
-# ── Progress ──────────────────────────────────────────────────────────────────
+# -- Progress ------------------------------------------------------------------
 
 func mark_battle_complete(map_id: String) -> void:
 	if map_id not in completed_battles:
@@ -72,7 +72,7 @@ func set_flag(flag: String, value = true) -> void:
 func get_flag(flag: String, default = false):
 	return story_flags.get(flag, default)
 
-# ── Serialization ─────────────────────────────────────────────────────────────
+# -- Serialization -------------------------------------------------------------
 
 func to_dict() -> Dictionary:
 	return {

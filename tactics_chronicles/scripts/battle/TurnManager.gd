@@ -3,7 +3,7 @@ extends Node
 ## Manages turn order (speed-sorted), round counting, and the Momentum / Surge system.
 ##
 ## Momentum: each unit builds Momentum every turn equal to their SPD.
-## At 100 Momentum a Surge prompt appears — spend it for a bonus action or ability upgrade.
+## At 100 Momentum a Surge prompt appears -- spend it for a bonus action or ability upgrade.
 ## This is PvP-safe: momentum is per-unit, deterministic, and synced easily.
 
 var all_units:    Array = []
@@ -14,9 +14,9 @@ var round_number: int   = 0
 # momentum[unit] = int 0-100
 var _momentum: Dictionary = {}
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Setup
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func initialize(units: Array) -> void:
 	all_units = units.duplicate()
@@ -34,16 +34,16 @@ func _build_queue() -> void:
 	)
 	EventBus.turn_order_updated.emit(turn_queue.duplicate())
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Turn flow
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func start_next_turn() -> Unit:
 	if turn_queue.is_empty():
 		_build_queue()
 		round_number += 1
 	if turn_queue.is_empty():
-		return null   # all units KO — battle engine will catch this
+		return null   # all units KO -- battle engine will catch this
 
 	current_unit = turn_queue.pop_front()
 	current_unit.has_moved = false
@@ -67,9 +67,9 @@ func end_current_turn() -> void:
 	EventBus.turn_ended.emit(current_unit)
 	current_unit = null
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Momentum / Surge
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _tick_momentum(unit: Unit) -> void:
 	var prev = _momentum.get(unit, 0)
@@ -90,9 +90,9 @@ func consume_surge(unit: Unit) -> bool:
 func has_surge(unit: Unit) -> bool:
 	return _momentum.get(unit, 0) >= 100
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Unit removal (KO or retreat)
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func on_unit_ko(unit: Unit) -> void:
 	turn_queue.erase(unit)
@@ -102,9 +102,9 @@ func on_unit_ko(unit: Unit) -> void:
 		end_current_turn()
 		start_next_turn()
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # HUD helpers
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func get_turn_preview(count: int = 6) -> Array:
 	var preview = []

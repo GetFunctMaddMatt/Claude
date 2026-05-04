@@ -3,14 +3,14 @@ extends Node2D
 ## A single combatant on the battlefield.
 ## Instantiated from save data or enemy definitions; never holds scene references.
 
-# ── Identity ──────────────────────────────────────────────────────────────────
+# -- Identity ------------------------------------------------------------------
 var unit_id:   String = ""
 var unit_name: String = "Unknown"
 var class_id:  String = "soldier"
 var is_player: bool   = true
 var controller: String = "player"   # "player" | "ai" | "pvp_remote"
 
-# ── Level / job ───────────────────────────────────────────────────────────────
+# -- Level / job ---------------------------------------------------------------
 var level:      int = 1
 var exp:        int = 0
 var job_level:  int = 1
@@ -23,7 +23,7 @@ var equipped: Dictionary = {
 	"movement": ""
 }
 
-# ── Base stats (from class data + growth) ─────────────────────────────────────
+# -- Base stats (from class data + growth) -------------------------------------
 var base_hp:   int = 80
 var base_mp:   int = 40
 var base_atk:  int = 10
@@ -34,7 +34,7 @@ var base_spd:  int = 5
 var base_move: int = 4
 var base_jump: int = 3
 
-# ── Current stats (base + equipment + buffs) ──────────────────────────────────
+# -- Current stats (base + equipment + buffs) ----------------------------------
 var max_hp:  int = 80
 var max_mp:  int = 40
 var hp:      int = 80
@@ -49,10 +49,10 @@ var jump:    int = 3
 var crit:    int = 0
 var eva:     int = 0
 
-# ── Equipment ─────────────────────────────────────────────────────────────────
+# -- Equipment -----------------------------------------------------------------
 var equipment: Dictionary = { "weapon": "", "armor": "", "accessory": "" }
 
-# ── Battle state ──────────────────────────────────────────────────────────────
+# -- Battle state --------------------------------------------------------------
 var grid_pos:   Vector2i = Vector2i.ZERO
 var facing:     String   = "south"
 var has_moved:  bool     = false
@@ -60,16 +60,16 @@ var has_acted:  bool     = false
 var is_ko:      bool     = false
 var momentum:   int      = 0   # 0-100; at 100 a Surge action becomes available
 
-# ── Status effects ────────────────────────────────────────────────────────────
+# -- Status effects ------------------------------------------------------------
 # { status_id: { duration: int, stacks: int, data: dict } }
 var statuses: Dictionary = {}
 
-# ── Stat modifiers from buffs (additive, cleared each battle) ─────────────────
+# -- Stat modifiers from buffs (additive, cleared each battle) -----------------
 var _stat_mods: Dictionary = {}
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Initialisation
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func init_from_class(cid: String, lv: int = 1) -> void:
 	class_id = cid
@@ -92,9 +92,9 @@ func init_from_class(cid: String, lv: int = 1) -> void:
 	hp = max_hp
 	mp = max_mp
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Stat calculation
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func recalculate_stats() -> void:
 	max_hp  = base_hp
@@ -148,9 +148,9 @@ func apply_stat_mod(stat: String, value: int, _duration: int = -1) -> void:
 	recalculate_stats()
 	EventBus.unit_stat_changed.emit(self, stat, 0, value)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # HP / MP
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func take_damage(amount: int, element: String = "none", source: Node = null) -> int:
 	var actual = max(1, amount)
@@ -190,9 +190,9 @@ func revive(hp_percent: float = 0.5) -> void:
 	hp = max(1, int(max_hp * hp_percent))
 	EventBus.unit_revived.emit(self)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Status effects
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func apply_status(status_id: String, duration: int) -> void:
 	statuses[status_id] = { "duration": duration, "stacks": 1 }
@@ -223,9 +223,9 @@ func _apply_status_tick(sid: String) -> void:
 		"burn":    take_damage(8, "fire", null)
 		_:         pass   # non-dot statuses handled by action resolver
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Skill access
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func can_use_skill(skill_id: String) -> bool:
 	if is_ko or has_acted:
@@ -243,9 +243,9 @@ func unlock_skill(skill_id: String) -> void:
 		unlocked_skills.append(skill_id)
 		EventBus.skill_unlocked.emit(self, skill_id)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Serialization
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func serialize() -> Dictionary:
 	return {

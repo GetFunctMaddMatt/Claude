@@ -1,9 +1,9 @@
 class_name AIController
 extends Node
 ## Behaviour modes for enemy AI. BattleEngine calls run(unit) each AI turn.
-## Each mode is a self-contained function — add new ones without touching BattleEngine.
+## Each mode is a self-contained function -- add new ones without touching BattleEngine.
 
-## Registered modes — map string key (from map JSON) to Callable
+## Registered modes -- map string key (from map JSON) to Callable
 var _modes: Dictionary = {}
 
 func _ready() -> void:
@@ -16,17 +16,17 @@ func _ready() -> void:
 		"passive":      _run_passive
 	}
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Entry point — called by BattleEngine
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
+# Entry point -- called by BattleEngine
+# -----------------------------------------------------------------------------
 
 func run(unit: Unit, mode: String, engine: BattleEngine) -> void:
 	var fn: Callable = _modes.get(mode, _run_aggressive)
 	fn.call(unit, engine)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Behaviour modes
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 ## Aggressive: close distance, use highest-power skill
 func _run_aggressive(unit: Unit, engine: BattleEngine) -> void:
@@ -67,7 +67,7 @@ func _run_defensive(unit: Unit, engine: BattleEngine) -> void:
 	# Only move if we have a skill that reaches the target
 	if _best_skill_for(unit, target, engine) != "":
 		_attack_best(unit, target, engine)
-	# Minimal movement — step back if threatened
+	# Minimal movement -- step back if threatened
 	if not unit.has_moved and _manhattan(unit.grid_pos, target.grid_pos) <= 1:
 		_move_away_from(unit, target.grid_pos, engine)
 
@@ -75,16 +75,16 @@ func _run_defensive(unit: Unit, engine: BattleEngine) -> void:
 func _run_hold_bridge(unit: Unit, engine: BattleEngine) -> void:
 	var target = _nearest_player(unit, engine)
 	if target == null: return
-	# Only attack — don't chase (hold the chokepoint)
+	# Only attack -- don't chase (hold the chokepoint)
 	_attack_best(unit, target, engine)
 
 ## Passive: does nothing (used for summoned wards, scripted NPCs)
 func _run_passive(_unit: Unit, _engine: BattleEngine) -> void:
 	pass
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Shared helpers
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _nearest_player(unit: Unit, engine: BattleEngine) -> Unit:
 	var best: Unit  = null

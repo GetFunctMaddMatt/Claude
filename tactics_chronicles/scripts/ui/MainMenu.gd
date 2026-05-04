@@ -63,7 +63,7 @@ func _init_new_game_state() -> void:
 	GameState.story_flags      = {}
 
 func _create_starter_party() -> Array:
-	# Two default starter units — player renames/customizes in camp screen
+	# Two default starter units -- player renames/customizes in camp screen
 	var warrior = {
 		"unit_id": "pc_01", "unit_name": "Aric",
 		"class_id": "soldier", "level": 1,

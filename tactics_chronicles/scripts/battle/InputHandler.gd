@@ -20,9 +20,9 @@ var selected_unit:   Unit       = null
 var selected_skill:  String     = ""
 var _move_tiles:     Array      = []
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Setup
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _ready() -> void:
 	EventBus.turn_started.connect(_on_turn_started)
@@ -55,9 +55,9 @@ func _handle_tap(pos: Vector2i) -> void:
 		InputState.AWAITING_MOVE: _tap_awaiting_move(pos)
 		InputState.SKILL_TARGETING: _tap_skill_targeting(pos)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # State handlers
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _tap_idle(pos: Vector2i) -> void:
 	var unit = battle_engine.grid.get_unit_at(pos)
@@ -68,20 +68,20 @@ func _tap_idle(pos: Vector2i) -> void:
 
 func _tap_unit_selected(pos: Vector2i) -> void:
 	var unit = battle_engine.grid.get_unit_at(pos)
-	# Tap same unit — deselect
+	# Tap same unit -- deselect
 	if unit == selected_unit:
 		_deselect()
 		return
-	# Tap another friendly — switch selection
+	# Tap another friendly -- switch selection
 	if unit != null and unit.is_player:
 		_select_unit(unit)
 		return
-	# Tap empty/enemy tile — attempt move if unit hasn't moved yet
+	# Tap empty/enemy tile -- attempt move if unit hasn't moved yet
 	if not selected_unit.has_moved and pos in _move_tiles:
 		_set_state(InputState.AWAITING_MOVE)
 		_confirm_move(pos)
 	elif unit != null and not unit.is_player:
-		# Tap enemy with no skill selected — try first available attack skill
+		# Tap enemy with no skill selected -- try first available attack skill
 		var atk_skill = _find_attack_skill_for(selected_unit, pos)
 		if atk_skill != "":
 			battle_engine.player_skill(selected_unit, atk_skill, pos)
@@ -112,9 +112,9 @@ func _tap_skill_targeting(pos: Vector2i) -> void:
 		selected_skill = ""
 		_set_state(InputState.UNIT_SELECTED)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Actions
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _select_unit(unit: Unit) -> void:
 	selected_unit = unit
@@ -171,9 +171,9 @@ func _find_attack_skill_for(unit: Unit, target_pos: Vector2i) -> String:
 			return sk_id
 	return ""
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Event handlers
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _on_turn_started(unit: Unit) -> void:
 	if unit.is_player:

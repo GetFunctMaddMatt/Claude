@@ -33,9 +33,9 @@ func close() -> void:
 	visible = false
 	EventBus.menu_closed.emit("shop")
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Buy
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _populate_buy_list() -> void:
 	item_list.clear()
@@ -43,7 +43,7 @@ func _populate_buy_list() -> void:
 	for item_id in shop_data.get("stock", []):
 		var item = DataManager.get_item(item_id)
 		if item.is_empty() or item.get("tier", 1) > tier_limit: continue
-		item_list.add_item("%s  — %d Gil" % [item["name"], item["price"]])
+		item_list.add_item("%s  -- %d Gil" % [item["name"], item["price"]])
 		item_list.set_item_metadata(item_list.item_count - 1, item_id)
 
 func _on_buy_pressed() -> void:
@@ -56,9 +56,9 @@ func _on_buy_pressed() -> void:
 	GameState.add_item(selected_item, int(qty_spinner.value))
 	EventBus.notification_requested.emit("Purchased %s x%d" % [item["name"], int(qty_spinner.value)], Color.GREEN)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Sell
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _populate_sell_list() -> void:
 	item_list.clear()
@@ -66,7 +66,7 @@ func _populate_sell_list() -> void:
 		var item = DataManager.get_item(item_id)
 		if item.is_empty(): continue
 		var qty = GameState.item_count(item_id)
-		item_list.add_item("%s x%d  — %d Gil ea" % [item["name"], qty, item.get("sell_price", 0)])
+		item_list.add_item("%s x%d  -- %d Gil ea" % [item["name"], qty, item.get("sell_price", 0)])
 		item_list.set_item_metadata(item_list.item_count - 1, item_id)
 
 func _on_sell_pressed() -> void:
@@ -81,9 +81,9 @@ func _on_sell_pressed() -> void:
 	EventBus.notification_requested.emit("Sold for %d Gil" % earned, Color.GREEN)
 	_populate_sell_list()
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Shared
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _on_item_selected(idx: int) -> void:
 	selected_item = item_list.get_item_metadata(idx)

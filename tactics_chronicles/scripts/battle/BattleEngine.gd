@@ -1,6 +1,6 @@
 class_name BattleEngine
 extends Node
-## Orchestrates a complete battle: map load → deploy → player/AI turns → victory/defeat.
+## Orchestrates a complete battle: map load -> deploy -> player/AI turns -> victory/defeat.
 ## Attach to the Battle scene. Holds refs to BattleGrid, TurnManager, ActionResolver.
 
 enum State { IDLE, DEPLOY, PLAYER_TURN, AI_TURN, ANIMATING, VICTORY, DEFEAT }
@@ -22,19 +22,19 @@ var _enemy_modes:  Dictionary = {}   # Unit -> ai_mode string
 var map_data:      Dictionary = {}
 var state:         State = State.IDLE
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Lifecycle
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _ready() -> void:
 	var map_id = GameState.pending_map_id
 	if map_id.is_empty():
-		map_id = "map_001_crossroads"   # dev fallback — lets you run Battle.tscn standalone
+		map_id = "map_001_crossroads"   # dev fallback -- lets you run Battle.tscn standalone
 	start_battle(map_id)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Battle start
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func start_battle(map_id: String) -> void:
 	map_data = DataManager.get_map(map_id)
@@ -57,9 +57,9 @@ func confirm_deployment() -> void:
 	if state != State.DEPLOY: return
 	_next_turn()
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Player actions (called by BattleHUD)
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func player_move(unit: Unit, destination: Vector2i) -> void:
 	if state != State.PLAYER_TURN: return
@@ -104,9 +104,9 @@ func player_end_turn(_unit: Unit) -> void:
 	if state != State.PLAYER_TURN: return
 	_end_current_turn()
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # AI turn
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _run_ai_turn(unit: Unit) -> void:
 	_set_state(State.AI_TURN)
@@ -184,9 +184,9 @@ func _pick_best_ai_skill(unit: Unit, target: Unit) -> String:
 			best_id  = sk_id
 	return best_id
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Result application
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _apply_results(results: Array) -> void:
 	for r in results:
@@ -247,9 +247,9 @@ func _use_item(unit: Unit, item_id: String, target_pos: Vector2i) -> void:
 			var results = action_resolver.resolve_skill(unit, "", target_pos, grid)
 			_apply_results(results)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Turn management
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _next_turn() -> void:
 	var unit = turn_manager.start_next_turn()
@@ -271,9 +271,9 @@ func _check_turn_done(unit: Unit) -> void:
 	if unit.has_moved and unit.has_acted:
 		_end_current_turn()
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Win / loss
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _check_victory() -> void:
 	var win  = map_data.get("win_condition",  "defeat_all")
@@ -294,9 +294,9 @@ func _on_unit_ko(unit: Unit) -> void:
 	turn_manager.on_unit_ko(unit)
 	_check_victory()
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Spawning
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _spawn_player_units() -> void:
 	var zones = map_data.get("deployment_zones", [])
@@ -324,9 +324,9 @@ func _spawn_enemy_units() -> void:
 		_enemy_modes[unit] = edef.get("ai", "aggressive")
 		enemy_units.append(unit)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Helpers
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _handle_victory() -> void:
 	var rewards = map_data.get("rewards", {})

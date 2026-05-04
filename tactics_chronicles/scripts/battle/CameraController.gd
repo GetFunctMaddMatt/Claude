@@ -22,7 +22,7 @@ func set_grid_bounds(grid_pixel_size: Vector2) -> void:
 	_grid_size = grid_pixel_size
 
 func _input(event: InputEvent) -> void:
-	# ── Touch (mobile) ────────────────────────────────────────────────────────
+	# -- Touch (mobile) --------------------------------------------------------
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			_touch_points[event.index] = event.position
@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 		elif _touch_points.size() == 2:
 			_handle_pinch()
 
-	# ── Mouse (desktop / editor testing) ─────────────────────────────────────
+	# -- Mouse (desktop / editor testing) -------------------------------------
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_MIDDLE:
 			_dragging = event.pressed
@@ -54,9 +54,9 @@ func _input(event: InputEvent) -> void:
 		position  = _cam_start - delta / zoom.x
 		_clamp_position()
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Pan / zoom helpers
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _handle_pan(relative: Vector2) -> void:
 	position -= relative / zoom.x * pan_speed
@@ -85,9 +85,9 @@ func _clamp_position() -> void:
 	position.x = clampf(position.x, half.x, maxf(_grid_size.x - half.x, half.x))
 	position.y = clampf(position.y, half.y, maxf(_grid_size.y - half.y, half.y))
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Snap to unit (call after turn starts)
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func snap_to(world_pos: Vector2, animated: bool = true) -> void:
 	if animated:

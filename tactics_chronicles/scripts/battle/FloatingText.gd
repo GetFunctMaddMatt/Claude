@@ -1,16 +1,16 @@
 class_name FloatingText
 extends Node2D
 ## Spawns floating labels for damage, healing, misses, and status names.
-## Call FloatingText.spawn() statically — no scene required.
+## Call FloatingText.spawn() statically -- no scene required.
 
 const FONT_SIZE_NORMAL: int = 18
 const FONT_SIZE_LARGE:  int = 26   # crits, KO
 const RISE_HEIGHT:      float = 64.0
 const DURATION:         float = 0.9
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Static factory — attach to any node that owns a canvas layer
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
+# Static factory -- attach to any node that owns a canvas layer
+# -----------------------------------------------------------------------------
 
 static func spawn(parent: Node, world_pos: Vector2, text: String,
 		color: Color, large: bool = false) -> void:
@@ -31,9 +31,9 @@ static func spawn(parent: Node, world_pos: Vector2, text: String,
 		.set_delay(DURATION * 0.4)
 	tw.chain().tween_callback(lbl.queue_free)
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Convenience helpers — call these from BattleEngine or GridRenderer
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
+# Convenience helpers -- call these from BattleEngine or GridRenderer
+# -----------------------------------------------------------------------------
 
 static func damage(parent: Node, world_pos: Vector2,
 		amount: int, element: String, is_crit: bool) -> void:
@@ -56,7 +56,7 @@ static func ko(parent: Node, world_pos: Vector2) -> void:
 static func level_up(parent: Node, world_pos: Vector2) -> void:
 	spawn(parent, world_pos, "LEVEL UP!", Color(1.0, 0.95, 0.2), true)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 static func _element_color(element: String) -> Color:
 	match element:

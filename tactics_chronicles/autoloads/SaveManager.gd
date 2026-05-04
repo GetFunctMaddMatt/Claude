@@ -8,7 +8,7 @@ const SAVE_FILE  = SAVE_DIR + "slot_%d.json"
 func _ready() -> void:
 	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
 
-# ── Save ──────────────────────────────────────────────────────────────────────
+# -- Save ----------------------------------------------------------------------
 
 func save(slot: int) -> void:
 	assert(slot >= 0 and slot < MAX_SLOTS)
@@ -17,7 +17,7 @@ func save(slot: int) -> void:
 	var file = FileAccess.open(SAVE_FILE % slot, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data, "\t"))
 
-# ── Load ──────────────────────────────────────────────────────────────────────
+# -- Load ----------------------------------------------------------------------
 
 func load_save(slot: int) -> bool:
 	var path = SAVE_FILE % slot
@@ -31,7 +31,7 @@ func load_save(slot: int) -> bool:
 	GameState.from_dict(data)
 	return true
 
-# ── Slot info (for save-select screen) ───────────────────────────────────────
+# -- Slot info (for save-select screen) ---------------------------------------
 
 func get_slot_info(slot: int) -> Dictionary:
 	var path = SAVE_FILE % slot
@@ -53,7 +53,7 @@ func slot_exists(slot: int) -> bool:
 func delete_slot(slot: int) -> void:
 	DirAccess.remove_absolute(SAVE_FILE % slot)
 
-# ── Auto-save ─────────────────────────────────────────────────────────────────
+# -- Auto-save -----------------------------------------------------------------
 
 func autosave() -> void:
 	save(0)   # slot 0 is always the autosave

@@ -8,9 +8,9 @@ var tiles:  Array = []              # [row][col] -> tile dict
 var units_on_grid:   Dictionary = {} # Vector2i -> Unit
 var objects_on_grid: Dictionary = {} # Vector2i -> object dict
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Map loading
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func load_map(map_data: Dictionary) -> void:
 	width  = map_data.get("width",  10)
@@ -22,9 +22,9 @@ func load_map(map_data: Dictionary) -> void:
 		var pos = Vector2i(obj["pos"][0], obj["pos"][1])
 		objects_on_grid[pos] = obj
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Tile queries
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func get_tile(pos: Vector2i) -> Dictionary:
 	if not is_in_bounds(pos):
@@ -64,9 +64,9 @@ func is_walkable(pos: Vector2i, unit: Unit) -> bool:
 	var h_diff = abs(get_height(pos) - get_height(unit.grid_pos))
 	return h_diff <= unit.jump
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Unit management
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func place_unit(unit: Unit, pos: Vector2i) -> void:
 	units_on_grid[pos] = unit
@@ -95,9 +95,9 @@ func _apply_terrain_entry(unit: Unit, pos: Vector2i) -> void:
 	if hazard == "poison":   unit.apply_status("poison", 4)
 	elif hazard == "lava":   unit.take_damage(30, "fire", null)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Pathfinding (Dijkstra)
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func get_movement_tiles(unit: Unit) -> Array:
 	var budget = unit.move
@@ -120,7 +120,7 @@ func get_movement_tiles(unit: Unit) -> Array:
 	return result
 
 func get_path(from: Vector2i, to: Vector2i, unit: Unit) -> Array:
-	# A* — returns tile positions to step through (not including 'from')
+	# A* -- returns tile positions to step through (not including 'from')
 	var open:   Dictionary = { from: 0.0 }
 	var came:   Dictionary = {}
 	var g:      Dictionary = { from: 0.0 }
@@ -157,9 +157,9 @@ func _neighbors(pos: Vector2i) -> Array:
 		Vector2i(pos.x, pos.y+1), Vector2i(pos.x, pos.y-1)
 	].filter(func(p): return is_in_bounds(p))
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Skill targeting — returns affected tile positions for a pattern
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
+# Skill targeting -- returns affected tile positions for a pattern
+# -----------------------------------------------------------------------------
 
 func get_tiles_in_pattern(origin: Vector2i, pattern: String, skill_range: int,
 		aoe_radius: int, facing: String) -> Array:
@@ -228,9 +228,9 @@ func _facing_to_dir(facing: String) -> Vector2i:
 func _manhattan(a: Vector2i, b: Vector2i) -> int:
 	return abs(a.x - b.x) + abs(a.y - b.y)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Line of sight
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func check_los(from: Vector2i, to: Vector2i) -> bool:
 	var from_h = get_height(from)
@@ -259,9 +259,9 @@ func _bresenham(a: Vector2i, b: Vector2i) -> Array:
 		if e2 < dx:  err += dx; y += sy
 	return pts
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Height & cover helpers (used by ActionResolver)
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func height_diff(attacker_pos: Vector2i, target_pos: Vector2i) -> int:
 	return get_height(attacker_pos) - get_height(target_pos)

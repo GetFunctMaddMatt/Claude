@@ -14,9 +14,9 @@ signal level_up(unit: Unit, new_level: int)
 signal job_level_up(unit: Unit, class_id: String, new_level: int)
 signal skill_unlocked(unit: Unit, skill_id: String)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Called after each victory
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func award_battle_rewards(player_units: Array, map_data: Dictionary) -> Array:
 	var rewards  = map_data.get("rewards", {})
@@ -43,7 +43,7 @@ func _award_unit(unit: Unit, exp: int, jp: int) -> Dictionary:
 		"skills_unlocked":  []
 	}
 
-	# ── Character EXP ────────────────────────────────────────────────────────
+	# -- Character EXP --------------------------------------------------------
 	unit.exp += exp
 	var threshold = unit.level * BASE_EXP_PER_LEVEL
 	if unit.exp >= threshold:
@@ -55,7 +55,7 @@ func _award_unit(unit: Unit, exp: int, jp: int) -> Dictionary:
 		EventBus.job_level_up.emit(unit, unit.class_id, unit.job_level)
 		FloatingText.level_up(get_tree().root, Vector2.ZERO)  # pos set by HUD
 
-	# ── Job EXP ───────────────────────────────────────────────────────────────
+	# -- Job EXP ---------------------------------------------------------------
 	unit.job_exp += jp
 	var jp_threshold = unit.job_level * BASE_JP_PER_JOB_LEVEL
 	if unit.job_exp >= jp_threshold:
@@ -70,9 +70,9 @@ func _award_unit(unit: Unit, exp: int, jp: int) -> Dictionary:
 
 	return result
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Stat growth
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _apply_stat_growth(unit: Unit) -> void:
 	var cd     = DataManager.get_class(unit.class_id)
@@ -90,9 +90,9 @@ func _apply_stat_growth(unit: Unit) -> void:
 	unit.hp = unit.max_hp
 	unit.mp = unit.max_mp
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Skill unlocks
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _check_skill_unlocks(unit: Unit) -> Array:
 	var newly_unlocked: Array = []
@@ -110,9 +110,9 @@ func get_all_unlocked(unit: Unit) -> Array:
 func get_available_to_unlock(unit: Unit) -> Array:
 	return DataManager.get_skills_unlocked_at(unit.class_id, unit.job_level)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Progress query helpers (used by PartyScreen)
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func exp_to_next_level(unit: Unit) -> int:
 	return unit.level * BASE_EXP_PER_LEVEL - unit.exp
@@ -128,9 +128,9 @@ func jp_percent(unit: Unit) -> float:
 	var needed = unit.job_level * BASE_JP_PER_JOB_LEVEL
 	return float(unit.job_exp) / float(needed)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Sync back to GameState party array
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _sync_to_save(unit: Unit) -> void:
 	for i in GameState.party.size():

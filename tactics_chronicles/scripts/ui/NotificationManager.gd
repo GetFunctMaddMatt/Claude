@@ -1,5 +1,5 @@
 extends CanvasLayer
-## Queued toast notifications — small banners that auto-dismiss.
+## Queued toast notifications -- small banners that auto-dismiss.
 ## Also listens to EventBus and auto-displays relevant events.
 
 const SHOW_DURATION: float = 2.2
@@ -16,7 +16,7 @@ func _ready() -> void:
 	EventBus.notification_requested.connect(_enqueue)
 	EventBus.unit_ko.connect(func(u: Unit): _enqueue("%s was defeated!" % u.unit_name, Color(0.9, 0.3, 0.3)))
 	EventBus.unit_status_applied.connect(func(u: Unit, sid: String):
-		_enqueue("%s → %s" % [u.unit_name, sid.capitalize()], Color(0.8, 0.6, 1.0)))
+		_enqueue("%s -> %s" % [u.unit_name, sid.capitalize()], Color(0.8, 0.6, 1.0)))
 	EventBus.job_level_up.connect(func(u: Unit, _cid, lv: int):
 		_enqueue("%s reached Job Lv %d!" % [u.unit_name, lv], Color(1.0, 0.9, 0.2)))
 	EventBus.gil_changed.connect(func(total: int, delta: int):

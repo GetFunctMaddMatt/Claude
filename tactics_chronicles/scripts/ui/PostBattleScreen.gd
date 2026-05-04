@@ -16,9 +16,9 @@ func _ready() -> void:
 	continue_btn.pressed.connect(_on_continue_pressed)
 	visible = false
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Open with results
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func show_results(victory: bool, rewards: Dictionary,
 		unit_results: Array, on_continue: Callable) -> void:
@@ -63,7 +63,7 @@ func _build_unit_rows(results: Array) -> void:
 		exp_lbl.text   = "+%d EXP  +%d JP" % [r.get("exp_gained", 0), r.get("jp_gained", 0)]
 		lv_lbl.text    = "Lv%d" % unit.level
 		if r.get("levelled_up", false):
-			lv_lbl.text       += " ▲"
+			lv_lbl.text       += " ^"
 			lv_lbl.modulate    = Color(1.0, 0.9, 0.2)
 		row.add_child(name_lbl)
 		row.add_child(exp_lbl)
@@ -81,7 +81,7 @@ func _build_skill_list(results: Array) -> void:
 			lbl.modulate = Color(0.5, 1.0, 0.7)
 			skills_panel.add_child(lbl)
 
-# ─────────────────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 func _on_continue_pressed() -> void:
 	visible = false
