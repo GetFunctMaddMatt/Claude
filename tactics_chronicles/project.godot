@@ -1,5 +1,5 @@
 ; Engine configuration file.
-; Generated for Tactics Chronicles - Godot 4.3
+; Tactics Chronicles -- Godot 4.6
 
 config_version=5
 
@@ -7,7 +7,7 @@ config_version=5
 
 config/name="Tactics Chronicles"
 config/run/main_scene="res://scenes/MainMenu.tscn"
-config/features=PackedStringArray("4.3", "Mobile")
+config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
