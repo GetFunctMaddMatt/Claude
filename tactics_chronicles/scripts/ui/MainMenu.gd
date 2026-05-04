@@ -7,6 +7,7 @@ extends Control
 @onready var quit_btn:      Button  = $Center/VBox/QuitBtn
 @onready var save_select:   Control = $SaveSelect
 @onready var version_label: Label   = $VersionLabel
+@onready var main_center:   Control = $Center
 
 func _ready() -> void:
 	new_game_btn.pressed.connect(_on_new_game)
@@ -15,7 +16,16 @@ func _ready() -> void:
 	quit_btn.pressed.connect(_on_quit)
 	version_label.text = "v0.1.0-dev"
 	save_select.slot_confirmed.connect(_on_slot_confirmed)
+	save_select.cancelled.connect(_show_main_menu)
 	_check_saves()
+
+func _show_main_menu() -> void:
+	main_center.visible = true
+	version_label.visible = true
+
+func _hide_main_menu() -> void:
+	main_center.visible = false
+	version_label.visible = false
 
 func _on_slot_confirmed(slot: int) -> void:
 	if save_select._mode == SaveSelect.Mode.NEW_GAME:
@@ -31,9 +41,11 @@ func _check_saves() -> void:
 			break
 
 func _on_new_game() -> void:
+	_hide_main_menu()
 	save_select.open_for_new_game()
 
 func _on_continue() -> void:
+	_hide_main_menu()
 	save_select.open_for_load()
 
 func _on_settings() -> void:
