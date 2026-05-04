@@ -14,7 +14,14 @@ func _ready() -> void:
 	settings_btn.pressed.connect(_on_settings)
 	quit_btn.pressed.connect(_on_quit)
 	version_label.text = "v0.1.0-dev"
+	save_select.slot_confirmed.connect(_on_slot_confirmed)
 	_check_saves()
+
+func _on_slot_confirmed(slot: int) -> void:
+	if save_select._mode == SaveSelect.Mode.NEW_GAME:
+		start_new_game(slot)
+	else:
+		load_game(slot)
 
 func _check_saves() -> void:
 	continue_btn.disabled = true

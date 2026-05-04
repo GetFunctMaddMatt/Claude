@@ -5,6 +5,9 @@ extends Node
 # ── Persistent state ──────────────────────────────────────────────────────────
 var current_chapter: String     = "ch01"
 var current_node:    String     = ""
+
+# ── Transient (not saved) ─────────────────────────────────────────────────────
+var pending_map_id:  String     = ""   # set by Overworld before switching to Battle
 var party:           Array      = []   # Array of unit save dicts
 var gil:             int        = 500
 var inventory:       Dictionary = {}   # item_id -> count

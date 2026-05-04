@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/MainMenu.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/SaveSelect.gd" id="2"]
 
 [node name="MainMenu" type="Control"]
 anchors_preset = 15
@@ -32,4 +33,21 @@ anchor_bottom = 1.0
 text = "v0.1.0-dev"
 
 [node name="SaveSelect" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 visible = false
+script = ExtResource("2")
+
+[node name="VBox" type="VBoxContainer" parent="SaveSelect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="SaveSelect/VBox"]
+text = "Select Slot"
+horizontal_alignment = 1
+
+[node name="SlotsVBox" type="VBoxContainer" parent="SaveSelect/VBox"]
+
+[node name="CancelBtn" type="Button" parent="SaveSelect/VBox"]
+text = "Cancel"

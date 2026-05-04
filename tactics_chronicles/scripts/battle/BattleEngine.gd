@@ -23,6 +23,16 @@ var map_data:      Dictionary = {}
 var state:         State = State.IDLE
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Lifecycle
+# ─────────────────────────────────────────────────────────────────────────────
+
+func _ready() -> void:
+	var map_id = GameState.pending_map_id
+	if map_id.is_empty():
+		map_id = "map_001_crossroads"   # dev fallback — lets you run Battle.tscn standalone
+	start_battle(map_id)
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Battle start
 # ─────────────────────────────────────────────────────────────────────────────
 

@@ -15,6 +15,16 @@
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1")
+grid = NodePath("BattleGrid")
+turn_manager = NodePath("TurnManager")
+action_resolver = NodePath("ActionResolver")
+ai_controller = NodePath("AIController")
+input_handler = NodePath("InputHandler")
+grid_renderer = NodePath("BattleGrid/GridRenderer")
+camera = NodePath("Camera2D")
+hud = NodePath("BattleHUD")
+job_system = NodePath("JobSystem")
+post_battle = NodePath("BattleHUD/PostBattleScreen")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("8")

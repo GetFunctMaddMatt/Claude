@@ -75,11 +75,10 @@ func _on_node_pressed(node_id: String) -> void:
 			_play_story(node_def.get("scene_id", ""))
 
 func _enter_battle(map_id: String) -> void:
-	GameState.current_node = _current_node
+	GameState.pending_map_id = map_id
+	GameState.current_node   = _current_node
 	SaveManager.autosave()
 	get_tree().change_scene_to_file("res://scenes/Battle.tscn")
-	# BattleScene reads map_id from GameState or node data
-	# TODO: pass map_id cleanly (via GameState temp field or scene param)
 
 func _enter_shop(node_def: Dictionary) -> void:
 	# TODO: open ShopScreen overlay with node_def shop data
