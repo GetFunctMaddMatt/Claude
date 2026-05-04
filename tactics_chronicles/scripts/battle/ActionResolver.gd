@@ -83,7 +83,7 @@ func _apply_to_unit(attacker: Unit, target: Unit,
 			var phys_p = skill.get("power_phys", power * 0.6)
 			var mag_p  = skill.get("power_mag",  power * 0.4)
 			result["damage"] = (_calc_physical(attacker, target, phys_p, grid, false)
-							  + _calc_magical(attacker, target, mag_p, element, grid))
+							+ _calc_magical(attacker, target, mag_p, element, grid))
 		"none":
 			pass
 
