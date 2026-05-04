@@ -113,7 +113,7 @@ func _move_away_from(unit: Unit, threat: Vector2i, engine: BattleEngine) -> void
 
 func _move_to(unit: Unit, dest: Vector2i, engine: BattleEngine) -> void:
 	if dest == unit.grid_pos: return
-	var path = engine.grid.get_path(unit.grid_pos, dest, unit)
+	var path = engine.grid.find_path(unit.grid_pos, dest, unit)
 	if path.is_empty(): return
 	engine.grid.move_unit(unit, path)
 	unit.has_moved = true

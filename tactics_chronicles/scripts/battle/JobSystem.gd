@@ -75,7 +75,7 @@ func _award_unit(unit: Unit, exp: int, jp: int) -> Dictionary:
 # -----------------------------------------------------------------------------
 
 func _apply_stat_growth(unit: Unit) -> void:
-	var cd     = DataManager.get_class(unit.class_id)
+	var cd     = DataManager.get_class_data(unit.class_id)
 	var growth = cd.get("stat_growth", {})
 	# Growth values are per-level increments
 	unit.base_hp   += growth.get("hp",   4)

@@ -66,7 +66,7 @@ func player_move(unit: Unit, destination: Vector2i) -> void:
 	if unit != turn_manager.current_unit: return
 	if unit.has_moved: return
 
-	var path = grid.get_path(unit.grid_pos, destination, unit)
+	var path = grid.find_path(unit.grid_pos, destination, unit)
 	if path.is_empty(): return
 
 	_set_state(State.ANIMATING)
@@ -126,7 +126,7 @@ func _run_ai_turn(unit: Unit) -> void:
 	if not unit.has_moved and not in_range:
 		var dest = _best_move_toward(unit, nearest.grid_pos)
 		if dest != unit.grid_pos:
-			var path = grid.get_path(unit.grid_pos, dest, unit)
+			var path = grid.find_path(unit.grid_pos, dest, unit)
 			grid.move_unit(unit, path)
 			unit.has_moved = true
 

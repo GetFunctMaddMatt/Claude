@@ -38,7 +38,7 @@ func _load_json(path: String) -> Dictionary:
 
 # -- Accessors -----------------------------------------------------------------
 
-func get_class(class_id: String) -> Dictionary:
+func get_class_data(class_id: String) -> Dictionary:
 	return classes.get(class_id, {})
 
 func get_skill(skill_id: String) -> Dictionary:

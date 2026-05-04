@@ -19,9 +19,8 @@ func _ready() -> void:
 func _load_chapter(chapter_id: String) -> void:
 	_chapter_data = DataManager.get_chapter(chapter_id)
 	chapter_label.text = _chapter_data.get("name", chapter_id)
-	_current_node = GameState.current_node.is_empty() \
-		? _chapter_data.get("starting_node", "") \
-		: GameState.current_node
+	_current_node = _chapter_data.get("starting_node", "") if GameState.current_node.is_empty() \
+		else GameState.current_node
 	_build_node_map()
 	EventBus.chapter_started.emit(chapter_id)
 

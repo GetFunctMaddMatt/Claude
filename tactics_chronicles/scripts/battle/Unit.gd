@@ -74,7 +74,7 @@ var _stat_mods: Dictionary = {}
 func init_from_class(cid: String, lv: int = 1) -> void:
 	class_id = cid
 	level    = lv
-	var cd   = DataManager.get_class(cid)
+	var cd   = DataManager.get_class_data(cid)
 	if cd.is_empty():
 		push_error("Unit.init_from_class: unknown class %s" % cid)
 		return

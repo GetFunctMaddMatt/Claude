@@ -119,7 +119,7 @@ func get_movement_tiles(unit: Unit) -> Array:
 	result.erase(unit.grid_pos)
 	return result
 
-func get_path(from: Vector2i, to: Vector2i, unit: Unit) -> Array:
+func find_path(from: Vector2i, to: Vector2i, unit: Unit) -> Array:
 	# A* -- returns tile positions to step through (not including 'from')
 	var open:   Dictionary = { from: 0.0 }
 	var came:   Dictionary = {}
