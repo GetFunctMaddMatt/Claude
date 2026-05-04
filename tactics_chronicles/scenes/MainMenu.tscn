@@ -7,47 +7,85 @@
 anchors_preset = 15
 script = ExtResource("1")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-alignment = 1
+color = Color(0.08, 0.08, 0.12, 1)
 
-[node name="TitleLabel" type="Label" parent="VBox"]
+[node name="Center" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="Center"]
+custom_minimum_size = Vector2(320, 0)
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="Center/VBox"]
 text = "TACTICS CHRONICLES"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 32
 
-[node name="NewGameBtn" type="Button" parent="VBox"]
+[node name="Spacer" type="Control" parent="Center/VBox"]
+custom_minimum_size = Vector2(0, 24)
+
+[node name="NewGameBtn" type="Button" parent="Center/VBox"]
+custom_minimum_size = Vector2(320, 56)
 text = "New Game"
 
-[node name="ContinueBtn" type="Button" parent="VBox"]
+[node name="ContinueBtn" type="Button" parent="Center/VBox"]
+custom_minimum_size = Vector2(320, 56)
 text = "Continue"
 
-[node name="SettingsBtn" type="Button" parent="VBox"]
+[node name="SettingsBtn" type="Button" parent="Center/VBox"]
+custom_minimum_size = Vector2(320, 56)
 text = "Settings"
 
-[node name="QuitBtn" type="Button" parent="VBox"]
+[node name="QuitBtn" type="Button" parent="Center/VBox"]
+custom_minimum_size = Vector2(320, 56)
 text = "Quit"
 
 [node name="VersionLabel" type="Label" parent="."]
+anchor_left = 0.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -28.0
+offset_bottom = -4.0
 text = "v0.1.0-dev"
+horizontal_alignment = 1
 
 [node name="SaveSelect" type="Control" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 visible = false
 script = ExtResource("2")
 
-[node name="VBox" type="VBoxContainer" parent="SaveSelect"]
+[node name="BG" type="ColorRect" parent="SaveSelect"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-alignment = 1
+color = Color(0.04, 0.04, 0.08, 0.92)
 
-[node name="TitleLabel" type="Label" parent="SaveSelect/VBox"]
+[node name="Center" type="CenterContainer" parent="SaveSelect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="SaveSelect/Center"]
+custom_minimum_size = Vector2(320, 0)
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="SaveSelect/Center/VBox"]
 text = "Select Slot"
 horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
 
-[node name="SlotsVBox" type="VBoxContainer" parent="SaveSelect/VBox"]
+[node name="SlotsVBox" type="VBoxContainer" parent="SaveSelect/Center/VBox"]
+theme_override_constants/separation = 8
 
-[node name="CancelBtn" type="Button" parent="SaveSelect/VBox"]
+[node name="CancelBtn" type="Button" parent="SaveSelect/Center/VBox"]
+custom_minimum_size = Vector2(320, 56)
 text = "Cancel"

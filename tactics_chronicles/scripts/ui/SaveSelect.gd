@@ -7,9 +7,9 @@ enum Mode { NEW_GAME, LOAD }
 signal slot_confirmed(slot: int)
 signal cancelled()
 
-@onready var title_label: Label        = $VBox/TitleLabel
-@onready var slots_vbox:  VBoxContainer = $VBox/SlotsVBox
-@onready var cancel_btn:  Button        = $VBox/CancelBtn
+@onready var title_label: Label        = $Center/VBox/TitleLabel
+@onready var slots_vbox:  VBoxContainer = $Center/VBox/SlotsVBox
+@onready var cancel_btn:  Button        = $Center/VBox/CancelBtn
 
 var _mode: Mode = Mode.LOAD
 
