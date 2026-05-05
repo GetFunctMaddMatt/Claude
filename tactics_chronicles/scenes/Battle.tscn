@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/battle/BattleEngine.gd"     id="1"]
 [ext_resource type="Script" path="res://scripts/battle/BattleGrid.gd"       id="2"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scripts/battle/CameraController.gd" id="8"]
 [ext_resource type="Script" path="res://scripts/battle/JobSystem.gd"        id="9"]
 [ext_resource type="Script" path="res://scripts/ui/BattleHUD.gd"            id="10"]
-[ext_resource type="Script" path="res://scripts/ui/PostBattleScreen.gd"     id="11"]
 [ext_resource type="Script" path="res://scripts/ui/NotificationManager.gd"  id="12"]
 
 [node name="Battle" type="Node2D"]
@@ -24,7 +23,6 @@ grid_renderer = NodePath("BattleGrid/GridRenderer")
 camera = NodePath("Camera2D")
 hud = NodePath("BattleHUD")
 job_system = NodePath("JobSystem")
-post_battle = NodePath("BattleHUD/PostBattleScreen")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("8")
@@ -66,13 +64,32 @@ anchor_bottom = 1.0
 anchor_right = 0.45
 offset_top = -130.0
 
-[node name="SkillMenu" type="VBoxContainer" parent="BattleHUD"]
+[node name="SkillMenu" type="Control" parent="BattleHUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+visible = false
+
+[node name="InputBlocker" type="ColorRect" parent="BattleHUD/SkillMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+color = Color(0, 0, 0, 0.35)
+
+[node name="Panel" type="PanelContainer" parent="BattleHUD/SkillMenu"]
 anchor_left = 0.45
 anchor_right = 1.0
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -220.0
-visible = false
+offset_left = -8.0
+offset_top = -240.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="VBox" type="VBoxContainer" parent="BattleHUD/SkillMenu/Panel"]
+theme_override_constants/separation = 4
 
 [node name="ActionLog" type="RichTextLabel" parent="BattleHUD"]
 anchor_left = 0.72
@@ -110,32 +127,6 @@ offset_top = -24.0
 offset_bottom = -2.0
 text = "SURGE!"
 visible = false
-
-[node name="PostBattleScreen" type="Control" parent="BattleHUD"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-visible = false
-script = ExtResource("11")
-
-[node name="VBox" type="VBoxContainer" parent="BattleHUD/PostBattleScreen"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="ResultLabel" type="Label" parent="BattleHUD/PostBattleScreen/VBox"]
-text = "VICTORY!"
-
-[node name="GilLabel" type="Label" parent="BattleHUD/PostBattleScreen/VBox"]
-text = ""
-
-[node name="ItemsLabel" type="Label" parent="BattleHUD/PostBattleScreen/VBox"]
-text = ""
-
-[node name="UnitRows" type="VBoxContainer" parent="BattleHUD/PostBattleScreen/VBox"]
-
-[node name="SkillsPanel" type="VBoxContainer" parent="BattleHUD/PostBattleScreen/VBox"]
-
-[node name="ContinueBtn" type="Button" parent="BattleHUD/PostBattleScreen/VBox"]
-text = "Continue"
 
 [node name="NotificationManager" type="CanvasLayer" parent="."]
 layer = 20

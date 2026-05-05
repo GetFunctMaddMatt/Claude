@@ -2,22 +2,75 @@
 
 [ext_resource type="Script" path="res://scripts/ui/PartyScreen.gd" id="1"]
 
-[node name="PartyScreen" type="Control"]
-visible = false
+[node name="PartyScreen" type="CanvasLayer"]
+layer = 50
+
+[node name="Root" type="Control" parent="."]
 anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
 script = ExtResource("1")
 
-[node name="UnitList" type="ItemList" parent="."]
+[node name="BG" type="ColorRect" parent="Root"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+color = Color(0.08, 0.08, 0.12, 1)
 
-[node name="TabBar" type="TabBar" parent="."]
+[node name="Margin" type="MarginContainer" parent="Root"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="StatPanel" type="Control" parent="."]
+[node name="VBox" type="VBoxContainer" parent="Root/Margin"]
+theme_override_constants/separation = 12
 
-[node name="SkillPanel" type="Control" parent="."]
+[node name="TitleLabel" type="Label" parent="Root/Margin/VBox"]
+text = "Party"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 28
+
+[node name="Body" type="HBoxContainer" parent="Root/Margin/VBox"]
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="UnitList" type="ItemList" parent="Root/Margin/VBox/Body"]
+custom_minimum_size = Vector2(260, 0)
+size_flags_vertical = 3
+
+[node name="Right" type="VBoxContainer" parent="Root/Margin/VBox/Body"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="TabBar" type="TabBar" parent="Root/Margin/VBox/Body/Right"]
+tab_count = 4
+tab_0/title = "Stats"
+tab_1/title = "Skills"
+tab_2/title = "Equip"
+tab_3/title = "Prebuild"
+
+[node name="StatPanel" type="PanelContainer" parent="Root/Margin/VBox/Body/Right"]
+size_flags_vertical = 3
+
+[node name="SkillPanel" type="PanelContainer" parent="Root/Margin/VBox/Body/Right"]
+size_flags_vertical = 3
 visible = false
 
-[node name="EquipPanel" type="Control" parent="."]
+[node name="EquipPanel" type="PanelContainer" parent="Root/Margin/VBox/Body/Right"]
+size_flags_vertical = 3
 visible = false
 
-[node name="PrebuildMenu" type="Control" parent="."]
+[node name="PrebuildMenu" type="PanelContainer" parent="Root/Margin/VBox/Body/Right"]
+size_flags_vertical = 3
 visible = false
+
+[node name="CloseBtn" type="Button" parent="Root/Margin/VBox"]
+custom_minimum_size = Vector2(0, 56)
+text = "Close"

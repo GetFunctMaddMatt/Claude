@@ -1,14 +1,18 @@
 class_name ShopScreen
 extends Control
 ## Shop screen: buy items, sell items, browse by category.
+## Standalone scene (ShopScreen.tscn) -- instantiated via add_child, freed via signal.
 
-@onready var item_list:      ItemList    = $ItemList
-@onready var detail_panel:   Control     = $DetailPanel
-@onready var buy_btn:        Button      = $BuyBtn
-@onready var sell_btn:       Button      = $SellBtn
-@onready var gil_label:      Label       = $GilLabel
-@onready var category_tabs:  TabBar      = $CategoryTabs
-@onready var qty_spinner:    SpinBox     = $QtySpinner
+signal closed()
+
+@onready var item_list:      ItemList       = $Margin/VBox/Body/ItemList
+@onready var detail_panel:   PanelContainer = $Margin/VBox/Body/DetailPanel
+@onready var buy_btn:        Button         = $Margin/VBox/Controls/BuyBtn
+@onready var sell_btn:       Button         = $Margin/VBox/Controls/SellBtn
+@onready var close_btn:      Button         = $Margin/VBox/Controls/CloseBtn
+@onready var gil_label:      Label          = $Margin/VBox/Header/GilLabel
+@onready var category_tabs:  TabBar         = $Margin/VBox/CategoryTabs
+@onready var qty_spinner:    SpinBox        = $Margin/VBox/Controls/QtySpinner
 
 var shop_data:     Dictionary = {}
 var selected_item: String     = ""
@@ -17,6 +21,7 @@ var _mode:         String     = "buy"   # "buy" | "sell"
 func _ready() -> void:
 	buy_btn.pressed.connect(_on_buy_pressed)
 	sell_btn.pressed.connect(_on_sell_pressed)
+	close_btn.pressed.connect(_on_close)
 	item_list.item_selected.connect(_on_item_selected)
 	category_tabs.tab_changed.connect(_on_category_changed)
 	EventBus.gil_changed.connect(_refresh_gil)
@@ -26,12 +31,11 @@ func open(data: Dictionary) -> void:
 	_mode = "buy"
 	_refresh_gil(GameState.gil, 0)
 	_populate_buy_list()
-	visible = true
 	EventBus.shop_opened.emit(data)
 
-func close() -> void:
-	visible = false
+func _on_close() -> void:
 	EventBus.menu_closed.emit("shop")
+	closed.emit()
 
 # -----------------------------------------------------------------------------
 # Buy

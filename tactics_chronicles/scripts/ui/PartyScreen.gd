@@ -1,13 +1,17 @@
 class_name PartyScreen
 extends Control
 ## Party management screen: equip gear, assign skills, apply prebuilds, view stats.
+## Standalone scene (PartyScreen.tscn) -- instantiated via add_child, freed via signal.
 
-@onready var unit_list:     ItemList  = $UnitList
-@onready var stat_panel:    Control   = $StatPanel
-@onready var skill_panel:   Control   = $SkillPanel
-@onready var equip_panel:   Control   = $EquipPanel
-@onready var prebuild_menu: Control   = $PrebuildMenu
-@onready var tab_bar:       TabBar    = $TabBar
+signal closed()
+
+@onready var unit_list:     ItemList      = $Margin/VBox/Body/UnitList
+@onready var tab_bar:       TabBar        = $Margin/VBox/Body/Right/TabBar
+@onready var stat_panel:    PanelContainer = $Margin/VBox/Body/Right/StatPanel
+@onready var skill_panel:   PanelContainer = $Margin/VBox/Body/Right/SkillPanel
+@onready var equip_panel:   PanelContainer = $Margin/VBox/Body/Right/EquipPanel
+@onready var prebuild_menu: PanelContainer = $Margin/VBox/Body/Right/PrebuildMenu
+@onready var close_btn:     Button        = $Margin/VBox/CloseBtn
 
 var current_unit: Unit = null
 var _units: Array = []
@@ -15,6 +19,7 @@ var _units: Array = []
 func _ready() -> void:
 	tab_bar.tab_changed.connect(_on_tab_changed)
 	unit_list.item_selected.connect(_on_unit_selected)
+	close_btn.pressed.connect(_on_close)
 
 func open(units: Array) -> void:
 	_units = units
@@ -22,12 +27,11 @@ func open(units: Array) -> void:
 	if units.size() > 0:
 		unit_list.select(0)
 		_show_unit(units[0])
-	visible = true
 	EventBus.menu_opened.emit("party")
 
-func close() -> void:
-	visible = false
+func _on_close() -> void:
 	EventBus.menu_closed.emit("party")
+	closed.emit()
 
 # -----------------------------------------------------------------------------
 # Unit list
@@ -36,32 +40,34 @@ func close() -> void:
 func _populate_unit_list() -> void:
 	unit_list.clear()
 	for u in _units:
-		unit_list.add_item("%s  Lv%d %s" % [u.unit_name, u.level, u.class_id])
+		var name_str: String = u.unit_name if u is Unit else u.get("unit_name", "?")
+		var level: int       = u.level if u is Unit else u.get("level", 1)
+		var class_id: String = u.class_id if u is Unit else u.get("class_id", "?")
+		unit_list.add_item("%s  Lv%d %s" % [name_str, level, class_id])
 
 func _on_unit_selected(idx: int) -> void:
 	_show_unit(_units[idx])
 
-func _show_unit(unit: Unit) -> void:
+func _show_unit(unit) -> void:
 	current_unit = unit
 	_refresh_stats(unit)
 	_refresh_skills(unit)
 	_refresh_equip(unit)
 
 # -----------------------------------------------------------------------------
-# Stats tab
+# Stats / Skills / Equip
 # -----------------------------------------------------------------------------
 
-func _refresh_stats(unit: Unit) -> void:
+func _refresh_stats(_unit) -> void:
 	# TODO: fill StatPanel labels from unit fields
 	pass
 
-# -----------------------------------------------------------------------------
-# Skills tab
-# -----------------------------------------------------------------------------
+func _refresh_skills(_unit) -> void:
+	# TODO: populate SkillPanel grid; allow drag-to-slot
+	pass
 
-func _refresh_skills(unit: Unit) -> void:
-	# Show all unlocked skills; highlight equipped ones; allow drag-to-slot
-	# TODO: populate SkillPanel grid
+func _refresh_equip(_unit) -> void:
+	# TODO: show equipped weapon/armor/accessory; allow swapping from inventory
 	pass
 
 func apply_prebuild(prebuild_id: String) -> void:
@@ -94,14 +100,6 @@ func equip_skill(skill_id: String, slot_type: String, slot_index: int = 0) -> vo
 	current_unit.recalculate_stats()
 	EventBus.party_updated.emit()
 
-# -----------------------------------------------------------------------------
-# Equipment tab
-# -----------------------------------------------------------------------------
-
-func _refresh_equip(unit: Unit) -> void:
-	# TODO: show equipped weapon/armor/accessory; allow swapping from inventory
-	pass
-
 func equip_item(item_id: String, slot: String) -> void:
 	if current_unit == null: return
 	var item = DataManager.get_item(item_id)
@@ -120,7 +118,7 @@ func equip_item(item_id: String, slot: String) -> void:
 # -----------------------------------------------------------------------------
 
 func _on_tab_changed(tab: int) -> void:
-	stat_panel.visible   = (tab == 0)
-	skill_panel.visible  = (tab == 1)
-	equip_panel.visible  = (tab == 2)
+	stat_panel.visible    = (tab == 0)
+	skill_panel.visible   = (tab == 1)
+	equip_panel.visible   = (tab == 2)
 	prebuild_menu.visible = (tab == 3)

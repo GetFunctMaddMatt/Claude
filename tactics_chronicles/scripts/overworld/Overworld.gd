@@ -2,10 +2,13 @@ extends Node2D
 ## Overworld map screen: chapters as node graphs.
 ## Player taps a node to advance (battle, shop, camp, story).
 
-@onready var node_map:       Control = $NodeMap
-@onready var chapter_label:  Label   = $UI/ChapterLabel
-@onready var party_btn:      Button  = $UI/PartyBtn
-@onready var save_btn:       Button  = $UI/SaveBtn
+const PARTY_SCREEN_SCENE = preload("res://scenes/PartyScreen.tscn")
+const SHOP_SCREEN_SCENE  = preload("res://scenes/ShopScreen.tscn")
+
+@onready var node_map:       Control = $UI/Root/NodeMap
+@onready var chapter_label:  Label   = $UI/Root/TopBar/ChapterLabel
+@onready var party_btn:      Button  = $UI/Root/TopBar/PartyBtn
+@onready var save_btn:       Button  = $UI/Root/TopBar/SaveBtn
 
 var _chapter_data: Dictionary = {}
 var _current_node: String     = ""
@@ -25,9 +28,7 @@ func _load_chapter(chapter_id: String) -> void:
 	EventBus.chapter_started.emit(chapter_id)
 
 func _build_node_map() -> void:
-	# TODO: Instantiate node buttons from _chapter_data["nodes"]
-	# Each node shows as a dot on the map; edges show connections.
-	# Completed nodes are greyed out; current node is highlighted.
+	# TODO: position node buttons from node_def["map_pos"]; draw edges
 	for child in node_map.get_children():
 		child.queue_free()
 	for node_def in _chapter_data.get("nodes", []):
@@ -36,7 +37,7 @@ func _build_node_map() -> void:
 func _create_map_node(node_def: Dictionary) -> void:
 	var btn = Button.new()
 	btn.text = node_def.get("label", node_def["id"])
-	# TODO: position from node_def["map_pos"]
+	btn.custom_minimum_size = Vector2(160, 48)
 	btn.pressed.connect(_on_node_pressed.bind(node_def["id"]))
 	var complete = GameState.is_battle_complete(node_def.get("map_id", ""))
 	btn.disabled = complete or not _is_node_reachable(node_def["id"])
@@ -45,7 +46,6 @@ func _create_map_node(node_def: Dictionary) -> void:
 func _is_node_reachable(node_id: String) -> bool:
 	if node_id == _current_node:
 		return true
-	# Check if any completed predecessor unlocks this node
 	for nd in _chapter_data.get("nodes", []):
 		if node_id in nd.get("unlock_next", []):
 			var prereq_map = nd.get("map_id", "")
@@ -80,8 +80,11 @@ func _enter_battle(map_id: String) -> void:
 	get_tree().change_scene_to_file("res://scenes/Battle.tscn")
 
 func _enter_shop(node_def: Dictionary) -> void:
-	# TODO: open ShopScreen overlay with node_def shop data
-	EventBus.shop_opened.emit(node_def)
+	var canvas = SHOP_SCREEN_SCENE.instantiate()
+	var screen: ShopScreen = canvas.get_node("Root")
+	screen.closed.connect(func(): canvas.queue_free())
+	add_child(canvas)
+	screen.open(node_def)
 
 func _enter_camp() -> void:
 	_open_party()
@@ -108,8 +111,11 @@ func _on_battle_ended(result: String) -> void:
 # -----------------------------------------------------------------------------
 
 func _open_party() -> void:
-	EventBus.menu_opened.emit("party")
-	# TODO: show PartyScreen overlay
+	var canvas = PARTY_SCREEN_SCENE.instantiate()
+	var screen: PartyScreen = canvas.get_node("Root")
+	screen.closed.connect(func(): canvas.queue_free())
+	add_child(canvas)
+	screen.open(GameState.party)
 
 func _save_game() -> void:
 	SaveManager.save(1)   # slot 1 = manual save

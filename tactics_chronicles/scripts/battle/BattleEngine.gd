@@ -14,7 +14,8 @@ enum State { IDLE, DEPLOY, PLAYER_TURN, AI_TURN, ANIMATING, VICTORY, DEFEAT }
 @export var camera:          CameraController
 @export var hud:             BattleHUD
 @export var job_system:      JobSystem
-@export var post_battle:     PostBattleScreen
+
+const POST_BATTLE_SCENE = preload("res://scenes/PostBattleScreen.tscn")
 
 var player_units:  Array = []
 var enemy_units:   Array = []
@@ -283,8 +284,7 @@ func _check_victory() -> void:
 	if lose == "party_wiped" and all_players_ko:
 		_set_state(State.DEFEAT)
 		EventBus.battle_ended.emit("defeat")
-		if post_battle:
-			post_battle.show_results(false, {}, [], func(): get_tree().change_scene_to_file("res://scenes/Overworld.tscn"))
+		_show_post_battle(false, {}, [])
 	elif win == "defeat_all" and all_enemies_ko:
 		_set_state(State.VICTORY)
 		EventBus.battle_ended.emit("victory")
@@ -338,9 +338,15 @@ func _handle_victory() -> void:
 		unit_results = job_system.award_battle_rewards(player_units, map_data)
 	GameState.mark_battle_complete(map_data.get("id", ""))
 	SaveManager.autosave()
-	if post_battle:
-		post_battle.show_results(true, rewards, unit_results,
-			func(): get_tree().change_scene_to_file("res://scenes/Overworld.tscn"))
+	_show_post_battle(true, rewards, unit_results)
+
+func _show_post_battle(victory: bool, rewards: Dictionary, unit_results: Array) -> void:
+	var canvas = POST_BATTLE_SCENE.instantiate()
+	var screen: PostBattleScreen = canvas.get_node("Root")
+	screen.closed.connect(func(): canvas.queue_free())
+	add_child(canvas)
+	screen.show_results(victory, rewards, unit_results,
+		func(): get_tree().change_scene_to_file("res://scenes/Overworld.tscn"))
 
 func _set_state(s: State) -> void:
 	state = s

@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var turn_bar:       HBoxContainer = $TurnBar
 @onready var unit_panel:     Control       = $UnitPanel
 @onready var skill_menu:     Control       = $SkillMenu
+@onready var skill_menu_vbox: VBoxContainer = $SkillMenu/Panel/VBox
 @onready var action_log:     RichTextLabel = $ActionLog
 @onready var end_turn_btn:   Button        = $EndTurnBtn
 @onready var momentum_bar:   ProgressBar   = $MomentumBar
@@ -109,7 +110,7 @@ func _refresh_unit_panel_if_selected(unit: Unit) -> void:
 		_refresh_unit_panel(unit)
 
 func _refresh_skill_menu(unit: Unit) -> void:
-	for child in skill_menu.get_children():
+	for child in skill_menu_vbox.get_children():
 		child.queue_free()
 	for sk_id in unit.get_active_skills():
 		var sk = DataManager.get_skill(sk_id)
@@ -120,8 +121,9 @@ func _refresh_skill_menu(unit: Unit) -> void:
 		btn.text       = "%s  [%d MP]" % [sk.get("name", sk_id), mp_cost]
 		btn.disabled   = not can_use
 		btn.tooltip_text = sk.get("description", "")
+		btn.custom_minimum_size = Vector2(0, 44)
 		btn.pressed.connect(_on_skill_btn_pressed.bind(sk_id))
-		skill_menu.add_child(btn)
+		skill_menu_vbox.add_child(btn)
 	skill_menu.visible = true
 
 func _on_skill_btn_pressed(sk_id: String) -> void:
