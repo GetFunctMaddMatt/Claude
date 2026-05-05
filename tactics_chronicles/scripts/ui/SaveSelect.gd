@@ -1,33 +1,26 @@
 class_name SaveSelect
 extends Control
-## Save slot selection screen -- used for both New Game (pick slot) and Continue (pick save).
+## Standalone save slot selection screen.
+## Instantiate via MainMenu, mode set externally before adding to tree.
 
 enum Mode { NEW_GAME, LOAD }
 
 signal slot_confirmed(slot: int)
 signal cancelled()
 
-@onready var title_label: Label        = $Center/VBox/TitleLabel
+var mode: Mode = Mode.LOAD
+
+@onready var title_label: Label         = $Center/VBox/TitleLabel
 @onready var slots_vbox:  VBoxContainer = $Center/VBox/SlotsVBox
 @onready var cancel_btn:  Button        = $Center/VBox/CancelBtn
 
-var _mode: Mode = Mode.LOAD
-
 func _ready() -> void:
-	cancel_btn.pressed.connect(func(): cancelled.emit(); hide())
-	visible = false
-
-func open_for_new_game() -> void:
-	_mode = Mode.NEW_GAME
-	title_label.text = "Select Save Slot"
+	cancel_btn.pressed.connect(_on_cancel)
+	title_label.text = "Select Save Slot" if mode == Mode.NEW_GAME else "Load Game"
 	_build_slots()
-	show()
 
-func open_for_load() -> void:
-	_mode = Mode.LOAD
-	title_label.text = "Load Game"
-	_build_slots()
-	show()
+func _on_cancel() -> void:
+	cancelled.emit()
 
 func _build_slots() -> void:
 	for child in slots_vbox.get_children():
@@ -35,27 +28,27 @@ func _build_slots() -> void:
 
 	for i in SaveManager.MAX_SLOTS:
 		if i == 0:
-			continue   # slot 0 = autosave, not shown to player
+			continue   # slot 0 = autosave, hidden from player
 		var info = SaveManager.get_slot_info(i)
 		var btn  = Button.new()
+		btn.custom_minimum_size = Vector2(320, 56)
 
-		if _mode == Mode.LOAD:
+		if mode == Mode.LOAD:
 			if not info.get("exists", false):
 				btn.disabled = true
 				btn.text = "Slot %d -- Empty" % i
 			else:
-				var ts  = info.get("timestamp", 0)
-				var dt  = Time.get_datetime_string_from_unix_time(int(ts))
+				var ts = info.get("timestamp", 0)
+				var dt = Time.get_datetime_string_from_unix_time(int(ts))
 				btn.text = "Slot %d -- %s  (%s)" % [i, info.get("chapter", "?"), dt]
 		else:
 			if info.get("exists", false):
 				btn.text = "Slot %d -- Overwrite save" % i
 			else:
-				btn.text = "Slot %d -- Empty" % i
+				btn.text = "Slot %d -- New game" % i
 
 		btn.pressed.connect(_on_slot_pressed.bind(i))
 		slots_vbox.add_child(btn)
 
 func _on_slot_pressed(slot: int) -> void:
 	slot_confirmed.emit(slot)
-	hide()

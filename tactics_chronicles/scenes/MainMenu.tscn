@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/MainMenu.gd" id="1"]
-[ext_resource type="Script" path="res://scripts/ui/SaveSelect.gd" id="2"]
 
 [node name="MainMenu" type="Control"]
 anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource("1")
 
 [node name="BG" type="ColorRect" parent="."]
@@ -55,39 +56,3 @@ offset_top = -28.0
 offset_bottom = -4.0
 text = "v0.1.0-dev"
 horizontal_alignment = 1
-
-[node name="SaveSelect" type="Control" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 0
-visible = false
-script = ExtResource("2")
-
-[node name="BG" type="ColorRect" parent="SaveSelect"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 0
-color = Color(0.04, 0.04, 0.08, 1.0)
-
-[node name="Center" type="CenterContainer" parent="SaveSelect"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="VBox" type="VBoxContainer" parent="SaveSelect/Center"]
-custom_minimum_size = Vector2(320, 0)
-theme_override_constants/separation = 12
-
-[node name="TitleLabel" type="Label" parent="SaveSelect/Center/VBox"]
-text = "Select Slot"
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 24
-
-[node name="SlotsVBox" type="VBoxContainer" parent="SaveSelect/Center/VBox"]
-theme_override_constants/separation = 8
-
-[node name="CancelBtn" type="Button" parent="SaveSelect/Center/VBox"]
-custom_minimum_size = Vector2(320, 56)
-text = "Cancel"
