@@ -1,19 +1,18 @@
 class_name BattleEngine
 extends Node
 ## Orchestrates a complete battle: map load -> deploy -> player/AI turns -> victory/defeat.
-## Attach to the Battle scene. Holds refs to BattleGrid, TurnManager, ActionResolver.
 
 enum State { IDLE, DEPLOY, PLAYER_TURN, AI_TURN, ANIMATING, VICTORY, DEFEAT }
 
-@export var grid:            BattleGrid
-@export var turn_manager:    TurnManager
-@export var action_resolver: ActionResolver
-@export var ai_controller:   AIController
-@export var input_handler:   InputHandler
-@export var grid_renderer:   GridRenderer
-@export var camera:          CameraController
-@export var hud:             BattleHUD
-@export var job_system:      JobSystem
+@onready var grid:            BattleGrid     = $BattleGrid
+@onready var turn_manager:    TurnManager    = $TurnManager
+@onready var action_resolver: ActionResolver = $ActionResolver
+@onready var ai_controller:   AIController   = $AIController
+@onready var input_handler:   InputHandler   = $InputHandler
+@onready var grid_renderer:   GridRenderer   = $BattleGrid/GridRenderer
+@onready var camera:          CameraController = $Camera2D
+@onready var hud:             BattleHUD      = $BattleHUD
+@onready var job_system:      JobSystem      = $JobSystem
 
 const POST_BATTLE_SCENE = preload("res://scenes/PostBattleScreen.tscn")
 const DEPLOY_PANEL_SCENE = preload("res://scenes/DeployPanel.tscn")
