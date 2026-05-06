@@ -11,9 +11,10 @@ var pending_map_id:  String     = ""   # set by Overworld before switching to Ba
 var party:           Array      = []   # Array of unit save dicts
 var gil:             int        = 500
 var inventory:       Dictionary = {}   # item_id -> count
-var unlocked_classes: Array     = ["soldier", "arcanist"]
-var completed_battles: Array    = []
-var story_flags:     Dictionary = {}
+var unlocked_classes:  Array      = ["soldier", "arcanist"]
+var completed_battles: Array      = []   # map IDs of won battles
+var visited_nodes:     Array      = []   # node IDs entered (all types)
+var story_flags:       Dictionary = {}
 
 # -- Gil -----------------------------------------------------------------------
 
@@ -66,6 +67,13 @@ func mark_battle_complete(map_id: String) -> void:
 func is_battle_complete(map_id: String) -> bool:
 	return map_id in completed_battles
 
+func mark_node_visited(node_id: String) -> void:
+	if node_id not in visited_nodes:
+		visited_nodes.append(node_id)
+
+func is_node_visited(node_id: String) -> bool:
+	return node_id in visited_nodes
+
 func set_flag(flag: String, value = true) -> void:
 	story_flags[flag] = value
 
@@ -84,15 +92,17 @@ func to_dict() -> Dictionary:
 		"inventory": inventory,
 		"unlocked_classes": unlocked_classes,
 		"completed_battles": completed_battles,
+		"visited_nodes": visited_nodes,
 		"story_flags": story_flags
 	}
 
 func from_dict(d: Dictionary) -> void:
-	current_chapter  = d.get("chapter", "ch01")
-	current_node     = d.get("node", "")
-	party            = d.get("party", [])
-	gil              = d.get("gil", 500)
-	inventory        = d.get("inventory", {})
-	unlocked_classes = d.get("unlocked_classes", ["soldier", "arcanist"])
+	current_chapter   = d.get("chapter", "ch01")
+	current_node      = d.get("node", "")
+	party             = d.get("party", [])
+	gil               = d.get("gil", 500)
+	inventory         = d.get("inventory", {})
+	unlocked_classes  = d.get("unlocked_classes", ["soldier", "arcanist"])
 	completed_battles = d.get("completed_battles", [])
-	story_flags      = d.get("story_flags", {})
+	visited_nodes     = d.get("visited_nodes", [])
+	story_flags       = d.get("story_flags", {})

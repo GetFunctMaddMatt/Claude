@@ -68,6 +68,7 @@ func _init_new_game_state() -> void:
 	GameState.inventory         = { "potion": 3, "ether": 1 }
 	GameState.unlocked_classes  = ["soldier", "arcanist"]
 	GameState.completed_battles = []
+	GameState.visited_nodes     = []
 	GameState.story_flags       = {}
 
 func _create_starter_party() -> Array:
