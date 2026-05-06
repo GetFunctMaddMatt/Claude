@@ -16,12 +16,16 @@ enum State { IDLE, DEPLOY, PLAYER_TURN, AI_TURN, ANIMATING, VICTORY, DEFEAT }
 @export var job_system:      JobSystem
 
 const POST_BATTLE_SCENE = preload("res://scenes/PostBattleScreen.tscn")
+const DEPLOY_PANEL_SCENE = preload("res://scenes/DeployPanel.tscn")
 
 var player_units:  Array = []
 var enemy_units:   Array = []
 var _enemy_modes:  Dictionary = {}   # Unit -> ai_mode string
 var map_data:      Dictionary = {}
 var state:         State = State.IDLE
+
+var deploy_controller: DeployController = null
+var _deploy_canvas:    CanvasLayer      = null
 
 # -----------------------------------------------------------------------------
 # Lifecycle
@@ -52,11 +56,41 @@ func start_battle(map_id: String) -> void:
 	_wire_subsystems()
 
 	_set_state(State.DEPLOY)
+	_start_deploy_phase()
 	EventBus.battle_started.emit(map_id)
+
+func _start_deploy_phase() -> void:
+	deploy_controller = DeployController.new()
+	deploy_controller.name = "DeployController"
+	deploy_controller.battle_engine = self
+	add_child(deploy_controller)
+	deploy_controller.deployment_confirmed.connect(_on_deploy_confirmed)
+
+	_deploy_canvas = DEPLOY_PANEL_SCENE.instantiate()
+	add_child(_deploy_canvas)
+	var panel: DeployPanel = _deploy_canvas.get_node("Root")
+	panel.unit_picked.connect(deploy_controller.pick_unit)
+	panel.bench_requested.connect(deploy_controller.bench_picked)
+	panel.begin_pressed.connect(confirm_deployment)
+	panel.bind(deploy_controller)
+
+	deploy_controller.start(player_units)
+
+func _on_deploy_confirmed() -> void:
+	if _deploy_canvas != null:
+		_deploy_canvas.queue_free()
+		_deploy_canvas = null
+	if deploy_controller != null:
+		deploy_controller.queue_free()
+		deploy_controller = null
+	_next_turn()
 
 func confirm_deployment() -> void:
 	if state != State.DEPLOY: return
-	_next_turn()
+	if deploy_controller != null:
+		deploy_controller.confirm()
+	else:
+		_next_turn()
 
 # -----------------------------------------------------------------------------
 # Player actions (called by BattleHUD)

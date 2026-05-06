@@ -7,6 +7,11 @@ signal battle_started(map_id: String)
 signal battle_ended(result: String)          # "victory" | "defeat" | "retreat"
 signal battle_state_changed(state: String)
 
+# -- Deploy phase --------------------------------------------------------------
+signal deployment_zones_shown(zones: Array)  # Vector2i array; empty = hide
+signal deploy_unit_picked(unit: Node)        # null when nothing picked
+signal deploy_layout_changed()               # roster/bench moved -- repaint UI
+
 # -- Turn flow -----------------------------------------------------------------
 signal turn_started(unit: Node)
 signal turn_ended(unit: Node)

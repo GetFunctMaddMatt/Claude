@@ -8,6 +8,7 @@ enum InputState {
 	UNIT_SELECTED,   # player unit selected, waiting for move or skill choice
 	AWAITING_MOVE,   # move range shown, waiting for destination tap
 	SKILL_TARGETING, # skill selected, waiting for target tap
+	BATTLE_DEPLOY,   # pre-battle deploy phase: taps go to DeployController
 	LOCKED           # animation playing, no input
 }
 
@@ -50,10 +51,15 @@ func _input(event: InputEvent) -> void:
 
 func _handle_tap(pos: Vector2i) -> void:
 	match state:
-		InputState.IDLE:         _tap_idle(pos)
-		InputState.UNIT_SELECTED: _tap_unit_selected(pos)
-		InputState.AWAITING_MOVE: _tap_awaiting_move(pos)
+		InputState.IDLE:            _tap_idle(pos)
+		InputState.UNIT_SELECTED:   _tap_unit_selected(pos)
+		InputState.AWAITING_MOVE:   _tap_awaiting_move(pos)
 		InputState.SKILL_TARGETING: _tap_skill_targeting(pos)
+		InputState.BATTLE_DEPLOY:   _tap_battle_deploy(pos)
+
+func _tap_battle_deploy(pos: Vector2i) -> void:
+	if battle_engine.deploy_controller == null: return
+	battle_engine.deploy_controller.tap_tile(pos)
 
 # -----------------------------------------------------------------------------
 # State handlers
@@ -183,10 +189,12 @@ func _on_turn_started(unit: Unit) -> void:
 		_set_state(InputState.LOCKED)
 
 func _on_battle_state_changed(s: String) -> void:
-	if s in ["ANIMATING", "AI_TURN", "VICTORY", "DEFEAT"]:
+	if s == "DEPLOY":
+		_set_state(InputState.BATTLE_DEPLOY)
+	elif s in ["ANIMATING", "AI_TURN", "VICTORY", "DEFEAT"]:
 		_set_state(InputState.LOCKED)
 	elif s == "PLAYER_TURN":
-		if state == InputState.LOCKED:
+		if state in [InputState.LOCKED, InputState.BATTLE_DEPLOY]:
 			_set_state(InputState.IDLE)
 
 func _set_state(s: InputState) -> void:

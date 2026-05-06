@@ -7,6 +7,7 @@ var height: int = 0
 var tiles:  Array = []              # [row][col] -> tile dict
 var units_on_grid:   Dictionary = {} # Vector2i -> Unit
 var objects_on_grid: Dictionary = {} # Vector2i -> object dict
+var deployment_zones: Array = []    # Vector2i array; player placement tiles
 
 # -----------------------------------------------------------------------------
 # Map loading
@@ -18,6 +19,9 @@ func load_map(map_data: Dictionary) -> void:
 	tiles  = map_data.get("tiles",  [])
 	units_on_grid.clear()
 	objects_on_grid.clear()
+	deployment_zones.clear()
+	for z in map_data.get("deployment_zones", []):
+		deployment_zones.append(Vector2i(z[0], z[1]))
 	for obj in map_data.get("objects", []):
 		var pos = Vector2i(obj["pos"][0], obj["pos"][1])
 		objects_on_grid[pos] = obj
@@ -55,6 +59,9 @@ func is_in_bounds(pos: Vector2i) -> bool:
 
 func is_occupied(pos: Vector2i) -> bool:
 	return units_on_grid.has(pos)
+
+func is_deployment_zone(pos: Vector2i) -> bool:
+	return pos in deployment_zones
 
 func is_walkable(pos: Vector2i, unit: Unit) -> bool:
 	if not is_in_bounds(pos) or is_impassable(pos):

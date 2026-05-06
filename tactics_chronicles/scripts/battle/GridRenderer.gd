@@ -12,6 +12,8 @@ const ALPHA_MOVE:   float = 0.35
 const ALPHA_SKILL:  float = 0.30
 const ALPHA_HOVER:  float = 0.50
 const ALPHA_SELECT: float = 0.70
+const ALPHA_DEPLOY: float = 0.40
+const ALPHA_DEPLOY_PICKED: float = 0.65
 
 var grid: BattleGrid = null
 
@@ -20,6 +22,8 @@ var move_tiles:    Array    = []
 var skill_tiles:   Array    = []
 var hovered_tile:  Vector2i = Vector2i(-1, -1)
 var selected_tile: Vector2i = Vector2i(-1, -1)
+var deploy_zones:  Array    = []     # tiles to highlight during deploy phase
+var deploy_picked: bool     = false  # true when player has a unit "in hand"
 
 # Cached terrain colors (hex string -> Color)
 var _terrain_colors: Dictionary = {}
@@ -31,6 +35,9 @@ func _ready() -> void:
 	EventBus.tile_hovered.connect(func(p):   hovered_tile  = p; queue_redraw())
 	EventBus.tile_selected.connect(func(p):  selected_tile = p; queue_redraw())
 	EventBus.unit_moved.connect(func(_u, _f, _t): queue_redraw())
+	EventBus.deployment_zones_shown.connect(func(zones): deploy_zones = zones; queue_redraw())
+	EventBus.deploy_unit_picked.connect(func(unit): deploy_picked = (unit != null); queue_redraw())
+	EventBus.deploy_layout_changed.connect(func(): queue_redraw())
 
 func _cache_terrain_colors() -> void:
 	var types = DataManager.terrain_types
@@ -69,6 +76,10 @@ func _draw_tile(pos: Vector2i) -> void:
 			str(h), HORIZONTAL_ALIGNMENT_RIGHT, -1, 9, Color(1, 1, 1, 0.6))
 
 func _draw_overlays() -> void:
+	for p in deploy_zones:
+		var alpha = ALPHA_DEPLOY_PICKED if deploy_picked else ALPHA_DEPLOY
+		draw_rect(_tile_rect(p), Color(0.2, 1.0, 0.4, alpha))
+		draw_rect(_tile_rect(p), Color(0.1, 0.7, 0.2, 0.9), false, 2.0)
 	for p in move_tiles:
 		draw_rect(_tile_rect(p), Color(0.2, 0.5, 1.0, ALPHA_MOVE))
 	for p in skill_tiles:
