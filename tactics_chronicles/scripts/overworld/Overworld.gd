@@ -70,11 +70,11 @@ func _add_edge_drawer(nodes: Array, by_id: Dictionary) -> void:
 	drawer.setup(edges)
 
 func _create_map_node(node_def: Dictionary) -> void:
-	var btn      := Button.new()
-	var raw_pos  := node_def.get("map_pos", [0, 0])
-	var type     := node_def.get("type", "")
-	var complete := _is_node_complete(node_def)
-	var reachable := _is_node_reachable(node_def["id"])
+	var btn:      Button  = Button.new()
+	var raw_pos:  Array   = node_def.get("map_pos", [0, 0])
+	var type:     String  = node_def.get("type", "")
+	var complete: bool    = _is_node_complete(node_def)
+	var reachable: bool   = _is_node_reachable(node_def["id"])
 
 	btn.text               = node_def.get("label", node_def["id"])
 	btn.custom_minimum_size = BTN_SIZE
@@ -87,7 +87,7 @@ func _create_map_node(node_def: Dictionary) -> void:
 		"story":  btn.modulate = Color(1.0, 0.90, 0.40)
 
 	# Battle nodes are locked out once won; shop/camp/story stay re-enterable.
-	var locked := (type == "battle" and complete) or not reachable
+	var locked: bool = (type == "battle" and complete) or not reachable
 	btn.disabled = locked
 	if type == "battle" and complete:
 		btn.modulate = btn.modulate.darkened(0.45)
