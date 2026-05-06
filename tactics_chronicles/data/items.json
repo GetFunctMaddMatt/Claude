@@ -1,0 +1,564 @@
+{
+  "items": {
+
+    "// ===== WEAPONS — SWORDS =====": {},
+    "iron_sword": {
+      "name": "Iron Sword",
+      "type": "weapon", "subtype": "sword", "tier": 1,
+      "price": 300, "sell_price": 150, "two_handed": false,
+      "allowed_classes": ["soldier", "knight", "paladin", "rogue", "assassin"],
+      "stats": { "atk": 8, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A dependable iron blade. Standard issue."
+    },
+    "steel_sword": {
+      "name": "Steel Sword",
+      "type": "weapon", "subtype": "sword", "tier": 2,
+      "price": 900, "sell_price": 450, "two_handed": false,
+      "allowed_classes": ["soldier", "knight", "paladin", "rogue", "assassin"],
+      "stats": { "atk": 16, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 2, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Tempered steel with a keen edge."
+    },
+    "silver_sword": {
+      "name": "Silver Sword",
+      "type": "weapon", "subtype": "sword", "tier": 3,
+      "price": 2200, "sell_price": 1100, "two_handed": false,
+      "allowed_classes": ["soldier", "knight", "paladin", "rogue", "assassin"],
+      "stats": { "atk": 26, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 4, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Forged from pure silver. Particularly effective against undead."
+    },
+    "TODO_excalibur": { "name": "Excalibur", "type": "weapon", "subtype": "sword", "tier": 4, "TODO": true },
+
+    "// ===== WEAPONS — GREAT SWORDS =====": {},
+    "iron_blade": {
+      "name": "Iron Blade",
+      "type": "weapon", "subtype": "great_sword", "tier": 1,
+      "price": 500, "sell_price": 250, "two_handed": true,
+      "allowed_classes": ["knight", "paladin", "berserker"],
+      "stats": { "atk": 14, "matk": 0, "def": 0, "mdef": 0, "spd": -1, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A heavy two-handed iron sword. Slow but devastating."
+    },
+    "claymore": {
+      "name": "Claymore",
+      "type": "weapon", "subtype": "great_sword", "tier": 2,
+      "price": 1400, "sell_price": 700, "two_handed": true,
+      "allowed_classes": ["knight", "paladin", "berserker"],
+      "stats": { "atk": 24, "matk": 0, "def": 0, "mdef": 0, "spd": -1, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A broad-bladed claymore capable of felling armored foes."
+    },
+    "TODO_zweihander": { "name": "Zweihander", "type": "weapon", "subtype": "great_sword", "tier": 3, "TODO": true },
+    "TODO_ragnarok": { "name": "Ragnarok", "type": "weapon", "subtype": "great_sword", "tier": 4, "TODO": true },
+
+    "// ===== WEAPONS — DAGGERS =====": {},
+    "stiletto": {
+      "name": "Stiletto",
+      "type": "weapon", "subtype": "dagger", "tier": 1,
+      "price": 250, "sell_price": 125, "two_handed": false,
+      "allowed_classes": ["rogue", "assassin", "arcanist", "time_mage", "enchanter"],
+      "stats": { "atk": 5, "matk": 0, "def": 0, "mdef": 0, "spd": 2, "hp": 0, "mp": 0, "crit": 8, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Fast and precise. Favored by thieves and spellcasters."
+    },
+    "venomblade": {
+      "name": "Venomblade",
+      "type": "weapon", "subtype": "dagger", "tier": 2,
+      "price": 1100, "sell_price": 550, "two_handed": false,
+      "allowed_classes": ["rogue", "assassin"],
+      "stats": { "atk": 10, "matk": 0, "def": 0, "mdef": 0, "spd": 2, "hp": 0, "mp": 0, "crit": 10, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none",
+      "on_hit_effect": { "status": "poison", "chance": 30 },
+      "passive": null, "use_effect": null,
+      "description": "Coated in slow-acting venom. A 30% chance to poison on hit."
+    },
+    "TODO_shadow_fang": { "name": "Shadow Fang", "type": "weapon", "subtype": "dagger", "tier": 3, "TODO": true },
+    "TODO_assassins_edge": { "name": "Assassin's Edge", "type": "weapon", "subtype": "dagger", "tier": 4, "TODO": true },
+
+    "// ===== WEAPONS — STAVES =====": {},
+    "oak_staff": {
+      "name": "Oak Staff",
+      "type": "weapon", "subtype": "staff", "tier": 1,
+      "price": 300, "sell_price": 150, "two_handed": true,
+      "allowed_classes": ["cleric", "summoner", "paladin"],
+      "stats": { "atk": 4, "matk": 10, "def": 0, "mdef": 2, "spd": 0, "hp": 0, "mp": 10, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A simple wooden staff channeling healing magic."
+    },
+    "blessed_staff": {
+      "name": "Blessed Staff",
+      "type": "weapon", "subtype": "staff", "tier": 2,
+      "price": 1200, "sell_price": 600, "two_handed": true,
+      "allowed_classes": ["cleric", "summoner", "paladin"],
+      "stats": { "atk": 6, "matk": 18, "def": 0, "mdef": 4, "spd": 0, "hp": 0, "mp": 20, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "holy", "on_hit_effect": null,
+      "passive": { "type": "stat_mod", "stat": "heal_power", "value": 10 },
+      "use_effect": null,
+      "description": "Infused with holy light. Boosts healing output by 10%."
+    },
+    "TODO_high_staff": { "name": "High Staff", "type": "weapon", "subtype": "staff", "tier": 3, "TODO": true },
+    "TODO_seraph_rod": { "name": "Seraph's Staff", "type": "weapon", "subtype": "staff", "tier": 4, "TODO": true },
+
+    "// ===== WEAPONS — RODS =====": {},
+    "pine_rod": {
+      "name": "Pine Rod",
+      "type": "weapon", "subtype": "rod", "tier": 1,
+      "price": 280, "sell_price": 140, "two_handed": true,
+      "allowed_classes": ["arcanist", "elementalist", "time_mage", "enchanter", "archmage", "shadow"],
+      "stats": { "atk": 2, "matk": 12, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 12, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A lightweight channeling rod for apprentice mages."
+    },
+    "flame_rod": {
+      "name": "Flame Rod",
+      "type": "weapon", "subtype": "rod", "tier": 2,
+      "price": 1000, "sell_price": 500, "two_handed": true,
+      "allowed_classes": ["arcanist", "elementalist", "time_mage", "enchanter", "archmage", "shadow"],
+      "stats": { "atk": 3, "matk": 20, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 15, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "fire",
+      "on_hit_effect": { "status": "burn", "chance": 15 },
+      "passive": { "type": "spell_amp", "element": "fire", "value": 15 },
+      "use_effect": null,
+      "description": "A rod wreathed in embers. Boosts fire spells by 15%."
+    },
+    "TODO_ice_rod": { "name": "Ice Rod", "type": "weapon", "subtype": "rod", "tier": 2, "TODO": true },
+    "TODO_thunder_rod": { "name": "Thunder Rod", "type": "weapon", "subtype": "rod", "tier": 2, "TODO": true },
+    "TODO_arcane_rod": { "name": "Arcane Rod", "type": "weapon", "subtype": "rod", "tier": 3, "TODO": true },
+    "TODO_chaos_rod": { "name": "Chaos Rod", "type": "weapon", "subtype": "rod", "tier": 4, "TODO": true },
+
+    "// ===== WEAPONS — BOWS =====": {},
+    "shortbow": {
+      "name": "Shortbow",
+      "type": "weapon", "subtype": "bow", "tier": 1,
+      "price": 350, "sell_price": 175, "two_handed": true,
+      "allowed_classes": ["ranger"],
+      "stats": { "atk": 9, "matk": 0, "def": 0, "mdef": 0, "spd": 1, "hp": 0, "mp": 0, "crit": 5, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A nimble bow with decent range."
+    },
+    "longbow": {
+      "name": "Longbow",
+      "type": "weapon", "subtype": "bow", "tier": 2,
+      "price": 1100, "sell_price": 550, "two_handed": true,
+      "allowed_classes": ["ranger"],
+      "stats": { "atk": 18, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 5, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A tall war bow with exceptional range."
+    },
+    "TODO_composite_bow": { "name": "Composite Bow", "type": "weapon", "subtype": "bow", "tier": 3, "TODO": true },
+    "TODO_elven_bow": { "name": "Elven Bow", "type": "weapon", "subtype": "bow", "tier": 4, "TODO": true },
+
+    "// ===== WEAPONS — AXES =====": {},
+    "hatchet": {
+      "name": "Hatchet",
+      "type": "weapon", "subtype": "axe", "tier": 1,
+      "price": 400, "sell_price": 200, "two_handed": false,
+      "allowed_classes": ["berserker", "soldier"],
+      "stats": { "atk": 12, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 6, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A brutal chopping weapon. High variance damage."
+    },
+    "TODO_battle_axe": { "name": "Battle Axe", "type": "weapon", "subtype": "axe", "tier": 2, "TODO": true },
+    "TODO_war_axe": { "name": "War Axe", "type": "weapon", "subtype": "axe", "tier": 3, "TODO": true },
+    "TODO_berserker_axe": { "name": "Berserker Axe", "type": "weapon", "subtype": "axe", "tier": 4, "TODO": true },
+
+    "// ===== WEAPONS — SPEARS =====": {},
+    "ashwood_spear": {
+      "name": "Ashwood Spear",
+      "type": "weapon", "subtype": "spear", "tier": 1,
+      "price": 380, "sell_price": 190, "two_handed": true,
+      "allowed_classes": ["soldier"],
+      "stats": { "atk": 10, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 2, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null,
+      "passive": { "type": "range_bonus", "value": 1 },
+      "use_effect": null,
+      "description": "A lightweight spear. Grants +1 range to basic attacks."
+    },
+    "TODO_steel_lance": { "name": "Steel Lance", "type": "weapon", "subtype": "spear", "tier": 2, "TODO": true },
+    "TODO_halberd": { "name": "Halberd", "type": "weapon", "subtype": "spear", "tier": 3, "TODO": true },
+    "TODO_dragon_spear": { "name": "Dragon Spear", "type": "weapon", "subtype": "spear", "tier": 4, "TODO": true },
+
+    "// ===== WEAPONS — KNUCKLES =====": {},
+    "iron_knuckles": {
+      "name": "Iron Knuckles",
+      "type": "weapon", "subtype": "knuckles", "tier": 1,
+      "price": 300, "sell_price": 150, "two_handed": false,
+      "allowed_classes": ["monk"],
+      "stats": { "atk": 7, "matk": 0, "def": 0, "mdef": 0, "spd": 1, "hp": 0, "mp": 0, "crit": 4, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Reinforced fist wraps. Faster and harder than bare hands."
+    },
+    "TODO_steel_knuckles": { "name": "Steel Knuckles", "type": "weapon", "subtype": "knuckles", "tier": 2, "TODO": true },
+    "TODO_tiger_fangs": { "name": "Tiger Fangs", "type": "weapon", "subtype": "knuckles", "tier": 3, "TODO": true },
+    "TODO_dragon_fist": { "name": "Dragon Fist", "type": "weapon", "subtype": "knuckles", "tier": 4, "TODO": true },
+
+    "// ===== WEAPONS — GRIMOIRES =====": {},
+    "shadow_tome": {
+      "name": "Shadow Tome",
+      "type": "weapon", "subtype": "grimoire", "tier": 1,
+      "price": 400, "sell_price": 200, "two_handed": false,
+      "allowed_classes": ["shadow", "assassin"],
+      "stats": { "atk": 4, "matk": 10, "def": 0, "mdef": 0, "spd": 1, "hp": 0, "mp": 8, "crit": 4, "eva": 0, "move": 0, "jump": 0 },
+      "element": "dark", "on_hit_effect": null,
+      "passive": { "type": "spell_amp", "element": "dark", "value": 10 },
+      "use_effect": null,
+      "description": "A tome bound in dark leather. Blends physical and magical power."
+    },
+    "TODO_void_grimoire": { "name": "Void Grimoire", "type": "weapon", "subtype": "grimoire", "tier": 3, "TODO": true },
+    "TODO_necronomicon": { "name": "Necronomicon", "type": "weapon", "subtype": "grimoire", "tier": 4, "TODO": true },
+
+    "// ===== ARMOR — LIGHT =====": {},
+    "leather_vest": {
+      "name": "Leather Vest",
+      "type": "armor", "subtype": "light", "tier": 1,
+      "price": 280, "sell_price": 140, "two_handed": false,
+      "allowed_classes": ["rogue", "ranger", "monk", "assassin", "soldier", "arcanist"],
+      "stats": { "atk": 0, "matk": 0, "def": 4, "mdef": 1, "spd": 0, "hp": 5, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Supple leather offering mobility with modest protection."
+    },
+    "chainmail_shirt": {
+      "name": "Chainmail Shirt",
+      "type": "armor", "subtype": "light", "tier": 2,
+      "price": 900, "sell_price": 450, "two_handed": false,
+      "allowed_classes": ["rogue", "ranger", "monk", "assassin", "soldier"],
+      "stats": { "atk": 0, "matk": 0, "def": 10, "mdef": 2, "spd": 0, "hp": 10, "mp": 0, "crit": 0, "eva": 2, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Interlocked rings provide solid defense without impeding movement."
+    },
+    "TODO_shadow_coat": { "name": "Shadow Coat", "type": "armor", "subtype": "light", "tier": 3, "TODO": true },
+    "TODO_dragonhide": { "name": "Dragonhide Armor", "type": "armor", "subtype": "light", "tier": 4, "TODO": true },
+
+    "// ===== ARMOR — MEDIUM =====": {},
+    "iron_plate": {
+      "name": "Iron Plate",
+      "type": "armor", "subtype": "medium", "tier": 1,
+      "price": 450, "sell_price": 225, "two_handed": false,
+      "allowed_classes": ["soldier", "knight", "paladin", "berserker"],
+      "stats": { "atk": 0, "matk": 0, "def": 8, "mdef": 2, "spd": 0, "hp": 15, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Solid iron plating. Reliable protection for front-line fighters."
+    },
+    "steel_plate": {
+      "name": "Steel Plate",
+      "type": "armor", "subtype": "medium", "tier": 2,
+      "price": 1300, "sell_price": 650, "two_handed": false,
+      "allowed_classes": ["soldier", "knight", "paladin", "berserker"],
+      "stats": { "atk": 0, "matk": 0, "def": 16, "mdef": 3, "spd": -1, "hp": 25, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Tempered steel plate. Heavier but significantly more protective."
+    },
+    "TODO_mythril_plate": { "name": "Mythril Plate", "type": "armor", "subtype": "medium", "tier": 3, "TODO": true },
+    "TODO_adamant_plate": { "name": "Adamant Plate", "type": "armor", "subtype": "medium", "tier": 4, "TODO": true },
+
+    "// ===== ARMOR — HEAVY =====": {},
+    "iron_armor": {
+      "name": "Iron Armor",
+      "type": "armor", "subtype": "heavy", "tier": 1,
+      "price": 600, "sell_price": 300, "two_handed": false,
+      "allowed_classes": ["knight", "paladin"],
+      "stats": { "atk": 0, "matk": 0, "def": 14, "mdef": 4, "spd": -2, "hp": 20, "mp": 0, "crit": 0, "eva": -5, "move": 0, "jump": -1 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Full iron armor. Maximum protection at the cost of agility."
+    },
+    "TODO_steel_armor": { "name": "Steel Armor", "type": "armor", "subtype": "heavy", "tier": 2, "TODO": true },
+    "TODO_mythril_armor": { "name": "Mythril Armor", "type": "armor", "subtype": "heavy", "tier": 3, "TODO": true },
+    "TODO_holy_armor": { "name": "Holy Armor", "type": "armor", "subtype": "heavy", "tier": 4, "TODO": true },
+
+    "// ===== ARMOR — ROBES =====": {},
+    "linen_robe": {
+      "name": "Linen Robe",
+      "type": "armor", "subtype": "robes", "tier": 1,
+      "price": 250, "sell_price": 125, "two_handed": false,
+      "allowed_classes": ["arcanist", "cleric", "elementalist", "time_mage", "enchanter", "summoner", "archmage"],
+      "stats": { "atk": 0, "matk": 0, "def": 2, "mdef": 8, "spd": 0, "hp": 0, "mp": 15, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Light robes woven to channel mana. Weak physically, strong magically."
+    },
+    "mage_robe": {
+      "name": "Mage Robe",
+      "type": "armor", "subtype": "robes", "tier": 2,
+      "price": 1000, "sell_price": 500, "two_handed": false,
+      "allowed_classes": ["arcanist", "cleric", "elementalist", "time_mage", "enchanter", "summoner", "archmage"],
+      "stats": { "atk": 0, "matk": 4, "def": 4, "mdef": 16, "spd": 0, "hp": 0, "mp": 25, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Enchanted robes that amplify spellcasting."
+    },
+    "TODO_archmage_robe": { "name": "Archmage Robe", "type": "armor", "subtype": "robes", "tier": 3, "TODO": true },
+    "TODO_celestial_robe": { "name": "Celestial Robe", "type": "armor", "subtype": "robes", "tier": 4, "TODO": true },
+
+    "// ===== ARMOR — MYSTIC =====": {},
+    "shadow_cloak_armor": {
+      "name": "Shadow Weave",
+      "type": "armor", "subtype": "mystic", "tier": 2,
+      "price": 1200, "sell_price": 600, "two_handed": false,
+      "allowed_classes": ["shadow", "assassin", "enchanter"],
+      "stats": { "atk": 0, "matk": 2, "def": 7, "mdef": 10, "spd": 1, "hp": 0, "mp": 10, "crit": 3, "eva": 5, "move": 0, "jump": 0 },
+      "element": "dark", "on_hit_effect": null,
+      "passive": { "type": "status_immunity", "status": "blind" },
+      "use_effect": null,
+      "description": "Armor woven from shadow essence. Immune to Blind."
+    },
+    "TODO_void_shroud": { "name": "Void Shroud", "type": "armor", "subtype": "mystic", "tier": 3, "TODO": true },
+    "TODO_eclipse_mantle": { "name": "Eclipse Mantle", "type": "armor", "subtype": "mystic", "tier": 4, "TODO": true },
+
+    "// ===== ARMOR — SHIELDS =====": {},
+    "wooden_shield": {
+      "name": "Wooden Shield",
+      "type": "armor", "subtype": "shield", "tier": 1,
+      "price": 200, "sell_price": 100, "two_handed": false,
+      "allowed_classes": ["soldier", "knight", "paladin", "cleric"],
+      "stats": { "atk": 0, "matk": 0, "def": 5, "mdef": 2, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 3, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A simple wooden shield. Better than nothing."
+    },
+    "iron_shield": {
+      "name": "Iron Shield",
+      "type": "armor", "subtype": "shield", "tier": 2,
+      "price": 750, "sell_price": 375, "two_handed": false,
+      "allowed_classes": ["soldier", "knight", "paladin", "cleric"],
+      "stats": { "atk": 0, "matk": 0, "def": 10, "mdef": 4, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 5, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A sturdy iron shield. Reliable protection."
+    },
+    "TODO_mythril_shield": { "name": "Mythril Shield", "type": "armor", "subtype": "shield", "tier": 3, "TODO": true },
+    "TODO_aegis": { "name": "Aegis", "type": "armor", "subtype": "shield", "tier": 4, "TODO": true },
+
+    "// ===== ACCESSORIES — RINGS =====": {},
+    "power_ring": {
+      "name": "Power Ring",
+      "type": "accessory", "subtype": "ring", "tier": 1,
+      "price": 400, "sell_price": 200, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 4, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A simple ring engraved with strength runes."
+    },
+    "magic_ring": {
+      "name": "Magic Ring",
+      "type": "accessory", "subtype": "ring", "tier": 1,
+      "price": 400, "sell_price": 200, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 4, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 10, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Amplifies magical attunement slightly."
+    },
+    "TODO_hp_ring": { "name": "Vitality Ring", "type": "accessory", "subtype": "ring", "tier": 2, "TODO": true },
+    "TODO_speed_ring": { "name": "Swiftness Ring", "type": "accessory", "subtype": "ring", "tier": 2, "TODO": true },
+    "TODO_crit_ring": { "name": "Keen Ring", "type": "accessory", "subtype": "ring", "tier": 3, "TODO": true },
+    "TODO_master_ring": { "name": "Master's Ring", "type": "accessory", "subtype": "ring", "tier": 4, "TODO": true },
+
+    "// ===== ACCESSORIES — AMULETS =====": {},
+    "antidote_charm": {
+      "name": "Antidote Charm",
+      "type": "accessory", "subtype": "amulet", "tier": 1,
+      "price": 350, "sell_price": 175, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 2, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null,
+      "passive": { "type": "status_immunity", "status": "poison" },
+      "use_effect": null,
+      "description": "Grants immunity to Poison."
+    },
+    "focus_amulet": {
+      "name": "Focus Amulet",
+      "type": "accessory", "subtype": "amulet", "tier": 2,
+      "price": 800, "sell_price": 400, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 20, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null,
+      "passive": { "type": "mp_regen", "value": 3 },
+      "use_effect": null,
+      "description": "Slowly restores MP each turn (+3/turn)."
+    },
+    "TODO_silence_ward": { "name": "Echo Ward", "type": "accessory", "subtype": "amulet", "tier": 2, "TODO": true },
+    "TODO_barrier_amulet": { "name": "Barrier Amulet", "type": "accessory", "subtype": "amulet", "tier": 3, "TODO": true },
+    "TODO_null_amulet": { "name": "Null Amulet", "type": "accessory", "subtype": "amulet", "tier": 4, "TODO": "immune all status" },
+
+    "// ===== ACCESSORIES — BOOTS =====": {},
+    "sprint_boots": {
+      "name": "Sprint Boots",
+      "type": "accessory", "subtype": "boots", "tier": 1,
+      "price": 500, "sell_price": 250, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 2, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 1, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "Enchanted boots. +1 Move, +2 Speed."
+    },
+    "TODO_climbing_boots": { "name": "Climbing Boots", "type": "accessory", "subtype": "boots", "tier": 2, "TODO": "+2 JUMP" },
+    "TODO_hermes_boots": { "name": "Hermes Boots", "type": "accessory", "subtype": "boots", "tier": 3, "TODO": "+2 MOV +3 SPD" },
+    "TODO_gale_boots": { "name": "Gale Boots", "type": "accessory", "subtype": "boots", "tier": 4, "TODO": true },
+
+    "// ===== ACCESSORIES — CLOAKS =====": {},
+    "traveler_cloak": {
+      "name": "Traveler's Cloak",
+      "type": "accessory", "subtype": "cloak", "tier": 1,
+      "price": 320, "sell_price": 160, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 1, "mdef": 1, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 5, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null, "use_effect": null,
+      "description": "A weathered cloak. Modest evasion bonus."
+    },
+    "TODO_shadow_cloak_acc": { "name": "Shadow Cloak", "type": "accessory", "subtype": "cloak", "tier": 3, "TODO": "+10 eva, conceal in forests" },
+    "TODO_void_cloak": { "name": "Void Cloak", "type": "accessory", "subtype": "cloak", "tier": 4, "TODO": true },
+
+    "// ===== CONSUMABLES — POTIONS =====": {},
+    "potion": {
+      "name": "Potion",
+      "type": "consumable", "subtype": "potion", "tier": 1,
+      "price": 80, "sell_price": 40, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "heal_hp", "value": 50 },
+      "description": "Restores 50 HP to one ally."
+    },
+    "hi_potion": {
+      "name": "Hi-Potion",
+      "type": "consumable", "subtype": "potion", "tier": 2,
+      "price": 250, "sell_price": 125, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "heal_hp", "value": 150 },
+      "description": "Restores 150 HP to one ally."
+    },
+    "x_potion": {
+      "name": "X-Potion",
+      "type": "consumable", "subtype": "potion", "tier": 3,
+      "price": 700, "sell_price": 350, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "heal_hp", "percent_max": 1.0 },
+      "description": "Fully restores HP to one ally."
+    },
+    "elixir": {
+      "name": "Elixir",
+      "type": "consumable", "subtype": "potion", "tier": 4,
+      "price": 2000, "sell_price": 1000, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "heal_hp_mp", "hp_percent": 1.0, "mp_percent": 1.0 },
+      "description": "Fully restores HP and MP to one ally."
+    },
+    "phoenix_down": {
+      "name": "Phoenix Down",
+      "type": "consumable", "subtype": "potion", "tier": 2,
+      "price": 500, "sell_price": 250, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "revive", "hp_percent": 0.5 },
+      "description": "Revives a KO'd ally with 50% HP."
+    },
+
+    "// ===== CONSUMABLES — ETHERS =====": {},
+    "ether": {
+      "name": "Ether",
+      "type": "consumable", "subtype": "ether", "tier": 1,
+      "price": 150, "sell_price": 75, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "heal_mp", "value": 30 },
+      "description": "Restores 30 MP to one ally."
+    },
+    "hi_ether": {
+      "name": "Hi-Ether",
+      "type": "consumable", "subtype": "ether", "tier": 2,
+      "price": 450, "sell_price": 225, "two_handed": false,
+      "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "heal_mp", "value": 80 },
+      "description": "Restores 80 MP to one ally."
+    },
+    "TODO_x_ether": { "name": "X-Ether", "type": "consumable", "subtype": "ether", "tier": 3, "TODO": "full MP restore" },
+
+    "// ===== CONSUMABLES — STATUS CURES =====": {},
+    "antidote": {
+      "name": "Antidote",
+      "type": "consumable", "subtype": "status_cure", "tier": 1,
+      "price": 50, "sell_price": 25, "two_handed": false, "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "cure_status", "status": "poison" },
+      "description": "Cures Poison."
+    },
+    "eye_drops": {
+      "name": "Eye Drops",
+      "type": "consumable", "subtype": "status_cure", "tier": 1,
+      "price": 50, "sell_price": 25, "two_handed": false, "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "cure_status", "status": "blind" },
+      "description": "Cures Blind."
+    },
+    "echo_herbs": {
+      "name": "Echo Herbs",
+      "type": "consumable", "subtype": "status_cure", "tier": 1,
+      "price": 50, "sell_price": 25, "two_handed": false, "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "cure_status", "status": "silence" },
+      "description": "Cures Silence."
+    },
+    "smelling_salts": {
+      "name": "Smelling Salts",
+      "type": "consumable", "subtype": "status_cure", "tier": 1,
+      "price": 60, "sell_price": 30, "two_handed": false, "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "cure_status", "status": "sleep" },
+      "description": "Cures Sleep."
+    },
+    "remedy": {
+      "name": "Remedy",
+      "type": "consumable", "subtype": "status_cure", "tier": 3,
+      "price": 400, "sell_price": 200, "two_handed": false, "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "cure_all_status" },
+      "description": "Cures all negative status effects."
+    },
+    "TODO_gold_needle": { "name": "Gold Needle", "type": "consumable", "subtype": "status_cure", "tier": 2, "TODO": "cure petrify" },
+    "TODO_holy_water": { "name": "Holy Water", "type": "consumable", "subtype": "status_cure", "tier": 2, "TODO": "cure zombie/dark" },
+
+    "// ===== CONSUMABLES — BATTLE ITEMS =====": {},
+    "throwing_knife": {
+      "name": "Throwing Knife",
+      "type": "consumable", "subtype": "battle_item", "tier": 1,
+      "price": 30, "sell_price": 15, "two_handed": false, "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "damage", "damage_type": "physical", "power": 0.8, "range": 4, "pattern": "single", "target_alignment": "enemy" },
+      "description": "Deals physical damage to one enemy at range."
+    },
+    "fire_bomb": {
+      "name": "Fire Bomb",
+      "type": "consumable", "subtype": "battle_item", "tier": 2,
+      "price": 120, "sell_price": 60, "two_handed": false, "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "fire", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "damage", "damage_type": "magical", "power": 1.2, "range": 4, "pattern": "explosion_1", "target_alignment": "enemy", "element": "fire" },
+      "description": "Deals fire damage in a small area."
+    },
+    "smoke_bomb_item": {
+      "name": "Smoke Bomb",
+      "type": "consumable", "subtype": "battle_item", "tier": 1,
+      "price": 80, "sell_price": 40, "two_handed": false, "allowed_classes": "all",
+      "stats": { "atk": 0, "matk": 0, "def": 0, "mdef": 0, "spd": 0, "hp": 0, "mp": 0, "crit": 0, "eva": 0, "move": 0, "jump": 0 },
+      "element": "none", "on_hit_effect": null, "passive": null,
+      "use_effect": { "type": "aoe_status", "status": "blind", "duration": 2, "range": 2, "pattern": "circle_enemy", "aoe_radius": 2, "target_alignment": "enemy" },
+      "description": "Blinds all enemies within 2 tiles for 2 turns."
+    },
+    "TODO_ice_shard": { "name": "Ice Shard", "type": "consumable", "subtype": "battle_item", "tier": 2, "TODO": "AOE ice damage + slow" },
+    "TODO_thunder_stone": { "name": "Thunder Stone", "type": "consumable", "subtype": "battle_item", "tier": 2, "TODO": "line lightning damage" },
+    "TODO_megapotion": { "name": "Megalixir", "type": "consumable", "subtype": "battle_item", "tier": 4, "TODO": "full HP+MP all allies" }
+
+  }
+}

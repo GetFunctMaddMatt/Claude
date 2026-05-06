@@ -1,0 +1,162 @@
+{
+  "status_effects": {
+
+    "poison": {
+      "name": "Poison", "type": "dot", "element": "none",
+      "tick": "turn_start", "dot_value": 0.083, "dot_mode": "percent_max_hp",
+      "stacks": false, "dispellable": true,
+      "color": "8b00ff", "description": "Deals ~1/12 max HP per turn."
+    },
+    "burn": {
+      "name": "Burn", "type": "dot", "element": "fire",
+      "tick": "turn_start", "dot_value": 8, "dot_mode": "flat",
+      "stacks": false, "dispellable": true,
+      "color": "ff4500", "description": "Deals 8 fire damage per turn."
+    },
+    "regen": {
+      "name": "Regen", "type": "hot", "element": "none",
+      "tick": "turn_start", "hot_value": 0.125, "hot_mode": "percent_max_hp",
+      "stacks": false, "dispellable": true,
+      "color": "00ff88", "description": "Restores ~1/8 max HP per turn."
+    },
+    "blind": {
+      "name": "Blind", "type": "debuff", "element": "none",
+      "tick": "none",
+      "modifier": { "hit_chance": -50 },
+      "stacks": false, "dispellable": true,
+      "color": "333333", "description": "-50% hit chance on all attacks."
+    },
+    "silence": {
+      "name": "Silence", "type": "debuff", "element": "none",
+      "tick": "none",
+      "modifier": { "blocks_mp_skills": true },
+      "stacks": false, "dispellable": true,
+      "color": "aaaaaa", "description": "Cannot use skills that cost MP."
+    },
+    "sleep": {
+      "name": "Sleep", "type": "skip", "element": "none",
+      "tick": "turn_start", "wakes_on_damage": true,
+      "modifier": { "skip_turn": true },
+      "stacks": false, "dispellable": true,
+      "color": "6699ff", "description": "Skip turns until damaged."
+    },
+    "stop": {
+      "name": "Stop", "type": "skip", "element": "none",
+      "tick": "turn_start",
+      "modifier": { "skip_turn": true },
+      "stacks": false, "dispellable": false,
+      "color": "ffff00", "description": "Skip turns for duration. Undispellable."
+    },
+    "stun": {
+      "name": "Stun", "type": "skip", "element": "none",
+      "tick": "turn_start", "duration_override": 1,
+      "modifier": { "skip_turn": true },
+      "stacks": false, "dispellable": true,
+      "color": "ffcc00", "description": "Skip next turn."
+    },
+    "slow": {
+      "name": "Slow", "type": "debuff", "element": "none",
+      "tick": "none",
+      "modifier": { "spd_multiplier": 0.5 },
+      "stacks": false, "dispellable": true, "conflicts_with": ["haste"],
+      "color": "cc88ff", "description": "SPD halved."
+    },
+    "haste": {
+      "name": "Haste", "type": "buff", "element": "none",
+      "tick": "none",
+      "modifier": { "spd_multiplier": 2.0 },
+      "stacks": false, "dispellable": true, "conflicts_with": ["slow"],
+      "color": "ffff88", "description": "SPD doubled."
+    },
+    "immobilize": {
+      "name": "Immobilize", "type": "debuff", "element": "none",
+      "tick": "none",
+      "modifier": { "blocks_move": true },
+      "stacks": false, "dispellable": true,
+      "color": "884400", "description": "Cannot move."
+    },
+    "berserk": {
+      "name": "Berserk", "type": "control", "element": "none",
+      "tick": "none",
+      "modifier": { "auto_attack_nearest": true, "atk_multiplier": 1.5, "mdef_multiplier": 0.5, "blocks_player_input": true },
+      "stacks": false, "dispellable": true,
+      "color": "ff2200", "description": "Auto-attacks nearest unit. ATK×1.5, MDEF×0.5."
+    },
+    "charm": {
+      "name": "Charm", "type": "control", "element": "none",
+      "tick": "none",
+      "modifier": { "switch_team": true },
+      "stacks": false, "dispellable": true,
+      "color": "ff88cc", "description": "Fights for the opposing team."
+    },
+    "confuse": {
+      "name": "Confuse", "type": "control", "element": "none",
+      "tick": "none",
+      "modifier": { "random_action": true },
+      "stacks": false, "dispellable": true,
+      "color": "ff44ff", "description": "Takes random actions."
+    },
+    "protect": {
+      "name": "Protect", "type": "buff", "element": "none",
+      "tick": "none",
+      "modifier": { "physical_damage_taken_multiplier": 0.5 },
+      "stacks": false, "dispellable": true,
+      "color": "88aaff", "description": "Physical damage taken ×0.5."
+    },
+    "shell": {
+      "name": "Shell", "type": "buff", "element": "none",
+      "tick": "none",
+      "modifier": { "magical_damage_taken_multiplier": 0.5 },
+      "stacks": false, "dispellable": true,
+      "color": "aaffaa", "description": "Magical damage taken ×0.5."
+    },
+    "float": {
+      "name": "Float", "type": "buff", "element": "wind",
+      "tick": "none",
+      "modifier": { "ignore_terrain_hazards": true, "immune_to_ground_effects": true },
+      "stacks": false, "dispellable": true,
+      "color": "ccffff", "description": "Immune to terrain hazards and ground effects."
+    },
+    "invisible": {
+      "name": "Invisible", "type": "buff", "element": "none",
+      "tick": "none",
+      "modifier": { "untargetable": true, "breaks_on_attack": true, "breaks_on_adjacent": true },
+      "stacks": false, "dispellable": false,
+      "color": "88888855", "description": "Cannot be targeted. Breaks on attack or adjacency."
+    },
+    "taunt": {
+      "name": "Taunted", "type": "debuff", "element": "none",
+      "tick": "none",
+      "modifier": { "forced_target": "taunter" },
+      "stacks": false, "dispellable": true,
+      "color": "ff6600", "description": "Must target the unit who applied Taunt."
+    },
+    "reflect": {
+      "name": "Reflect", "type": "buff", "element": "none",
+      "tick": "none",
+      "modifier": { "reflect_next_magic": true, "once_per_application": true },
+      "stacks": false, "dispellable": false,
+      "color": "ffffff", "description": "Reflects the next magical attack back at the caster."
+    },
+    "zombie": {
+      "name": "Zombie", "type": "debuff", "element": "dark",
+      "tick": "none",
+      "modifier": { "healing_is_damage": true, "fire_heals": true },
+      "stacks": false, "dispellable": true,
+      "color": "446644", "description": "Healing becomes damage. Fire damage heals instead."
+    },
+    "petrify": {
+      "name": "Petrify", "type": "skip", "element": "earth",
+      "tick": "none",
+      "modifier": { "skip_turn": true, "immune_to_damage": true, "breaks_on_physical_hit": true },
+      "stacks": false, "dispellable": true,
+      "color": "aaaaaa", "description": "Cannot act but immune to damage. Physical hit breaks it."
+    },
+    "doom": {
+      "name": "Doom", "type": "countdown", "element": "dark",
+      "tick": "turn_start", "on_expire": "instant_ko",
+      "stacks": false, "dispellable": false,
+      "color": "000000", "description": "KO'd when timer expires. Undispellable."
+    }
+  }
+}

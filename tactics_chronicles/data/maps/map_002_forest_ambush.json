@@ -1,0 +1,36 @@
+{
+  "id": "map_002_forest_ambush",
+  "name": "Thornwood Ambush",
+  "width": 12, "height": 10,
+  "theme": "outdoor_dusk", "weather": "overcast",
+  "tiles": [
+    [{"t":"dense_forest","h":2},{"t":"dense_forest","h":2},{"t":"forest","h":1},{"t":"forest","h":1},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"forest","h":1},{"t":"forest","h":1},{"t":"dense_forest","h":2},{"t":"dense_forest","h":2},{"t":"dense_forest","h":2}],
+    [{"t":"dense_forest","h":2},{"t":"forest","h":1},{"t":"forest","h":1},{"t":"tall_grass","h":0},{"t":"road","h":0},{"t":"road","h":0},{"t":"road","h":0},{"t":"tall_grass","h":0},{"t":"forest","h":1},{"t":"forest","h":1},{"t":"forest","h":1},{"t":"dense_forest","h":2}],
+    [{"t":"forest","h":1},{"t":"forest","h":1},{"t":"hill","h":2},{"t":"grass","h":0},{"t":"road","h":0},{"t":"ruins","h":1},{"t":"road","h":0},{"t":"grass","h":0},{"t":"hill","h":2},{"t":"forest","h":1},{"t":"forest","h":1},{"t":"forest","h":1}],
+    [{"t":"forest","h":1},{"t":"tall_grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"road","h":0},{"t":"road","h":0},{"t":"road","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"tall_grass","h":0},{"t":"forest","h":1},{"t":"forest","h":1}],
+    [{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"wall","h":3},{"t":"road","h":0},{"t":"road","h":0},{"t":"road","h":0},{"t":"wall","h":3},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"forest","h":1},{"t":"forest","h":1}],
+    [{"t":"grass","h":0},{"t":"mud","h":0},{"t":"mud","h":0},{"t":"grass","h":0},{"t":"road","h":0},{"t":"road","h":0},{"t":"road","h":0},{"t":"grass","h":0},{"t":"mud","h":0},{"t":"mud","h":0},{"t":"grass","h":0},{"t":"forest","h":1}],
+    [{"t":"grass","h":0},{"t":"grass","h":0},{"t":"hill","h":1},{"t":"grass","h":0},{"t":"road","h":0},{"t":"grass","h":0},{"t":"road","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"hill","h":1},{"t":"grass","h":0},{"t":"grass","h":0}],
+    [{"t":"forest","h":1},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"road","h":0},{"t":"road","h":0},{"t":"road","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"forest","h":1}],
+    [{"t":"forest","h":1},{"t":"forest","h":1},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"forest","h":1},{"t":"forest","h":1},{"t":"forest","h":1}],
+    [{"t":"forest","h":1},{"t":"forest","h":1},{"t":"forest","h":1},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0},{"t":"forest","h":1},{"t":"forest","h":1},{"t":"forest","h":1},{"t":"forest","h":1}]
+  ],
+  "objects": [
+    { "pos": [5, 2], "type": "chest", "loot": "hi_potion" },
+    { "pos": [3, 4], "type": "barrel" },
+    { "pos": [7, 4], "type": "barrel" },
+    { "pos": [2, 5], "type": "trap",   "trap_type": "immobilize" },
+    { "pos": [9, 5], "type": "trap",   "trap_type": "immobilize" }
+  ],
+  "deployment_zones": [[1,8],[2,8],[3,8],[1,9],[2,9],[3,9]],
+  "enemy_squads": [
+    { "pos": [5,0], "job": "ranger",  "level": 2, "ai": "ranged_hold", "name": "Forest Scout" },
+    { "pos": [2,1], "job": "rogue",   "level": 2, "ai": "flanker",     "name": "Ambusher" },
+    { "pos": [9,1], "job": "rogue",   "level": 2, "ai": "flanker",     "name": "Ambusher" },
+    { "pos": [5,3], "job": "soldier", "level": 2, "ai": "aggressive",  "name": "Bandit Captain" }
+  ],
+  "win_condition":  "defeat_all",
+  "lose_condition": "party_wiped",
+  "rewards": { "gil": 200, "exp": 140, "items": ["antidote", "ether"] },
+  "intro_text": "The forest path is never safe after dark. Eyes watch from every shadow."
+}

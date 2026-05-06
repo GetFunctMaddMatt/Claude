@@ -1,0 +1,72 @@
+{
+  "title": "Tactics Chronicles",
+  "chapters": [
+    {
+      "id": "ch01",
+      "name": "Chapter 1: Embers of War",
+      "starting_node": "node_ch01_01",
+      "nodes": [
+        {
+          "id":         "node_ch01_01",
+          "label":      "Merchant's Crossroads",
+          "type":       "battle",
+          "map_id":     "map_001_crossroads",
+          "map_pos":    [120, 300],
+          "unlock_next":["node_ch01_02"],
+          "required":   true
+        },
+        {
+          "id":         "node_ch01_02",
+          "label":      "Travelling Merchant",
+          "type":       "shop",
+          "map_pos":    [200, 250],
+          "tier_limit": 1,
+          "stock":      ["iron_sword","iron_plate","wooden_shield","linen_robe","pine_rod","shortbow",
+                         "iron_knuckles","stiletto","leather_vest","potion","ether","antidote","eye_drops",
+                         "echo_herbs","throwing_knife","power_ring","traveler_cloak"],
+          "unlock_next":["node_ch01_03","node_ch01_camp"]
+        },
+        {
+          "id":         "node_ch01_camp",
+          "label":      "Camp",
+          "type":       "camp",
+          "map_pos":    [200, 350],
+          "unlock_next":[]
+        },
+        {
+          "id":         "node_ch01_03",
+          "label":      "Thornwood Ambush",
+          "type":       "battle",
+          "map_id":     "map_002_forest_ambush",
+          "map_pos":    [320, 200],
+          "unlock_next":["node_ch01_04"],
+          "required":   true
+        },
+        {
+          "id":         "node_ch01_04",
+          "label":      "Ironford Bridge",
+          "type":       "battle",
+          "map_id":     "map_003_river_crossing",
+          "map_pos":    [460, 180],
+          "unlock_next":["node_ch01_end"],
+          "required":   true
+        },
+        {
+          "id":         "node_ch01_end",
+          "label":      "End of Chapter 1",
+          "type":       "story",
+          "scene_id":   "cutscene_ch01_end",
+          "map_pos":    [580, 200],
+          "unlock_next":["TODO_ch02_node01"]
+        }
+      ]
+    },
+    {
+      "id":   "ch02",
+      "name": "Chapter 2: TODO",
+      "TODO": true,
+      "starting_node": "TODO_ch02_node01",
+      "nodes": []
+    }
+  ]
+}

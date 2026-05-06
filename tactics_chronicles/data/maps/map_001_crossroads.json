@@ -1,0 +1,31 @@
+{
+  "id": "map_001_crossroads",
+  "name": "Merchant's Crossroads",
+  "width": 10, "height": 8,
+  "theme": "outdoor_day", "weather": "clear",
+  "tiles": [
+    [{"t":"forest","h":1},{"t":"forest","h":1},{"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"forest","h":1},{"t":"forest","h":1},{"t":"forest","h":1}],
+    [{"t":"forest","h":1},{"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"road","h":0},  {"t":"road","h":0},  {"t":"road","h":0},  {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"forest","h":1}],
+    [{"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"hill","h":2},  {"t":"road","h":0},  {"t":"ruins","h":1}, {"t":"road","h":0},  {"t":"hill","h":2},  {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}],
+    [{"t":"grass","h":0}, {"t":"tall_grass","h":0},{"t":"grass","h":0},{"t":"road","h":0},{"t":"road","h":0}, {"t":"road","h":0},  {"t":"grass","h":0}, {"t":"tall_grass","h":0},{"t":"grass","h":0},{"t":"grass","h":0}],
+    [{"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"road","h":0},  {"t":"road","h":0},  {"t":"road","h":0},  {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}],
+    [{"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"hill","h":1},  {"t":"road","h":0},  {"t":"grass","h":0}, {"t":"road","h":0},  {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}],
+    [{"t":"forest","h":1},{"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"road","h":0},  {"t":"road","h":0},  {"t":"road","h":0},  {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"forest","h":1}],
+    [{"t":"forest","h":1},{"t":"forest","h":1},{"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"grass","h":0}, {"t":"forest","h":1},{"t":"forest","h":1},{"t":"forest","h":1}]
+  ],
+  "objects": [
+    { "pos": [4, 2], "type": "chest", "loot": "potion" },
+    { "pos": [1, 3], "type": "barrel" },
+    { "pos": [8, 3], "type": "barrel" }
+  ],
+  "deployment_zones": [[0,6],[1,6],[2,6],[0,7],[1,7],[2,7]],
+  "enemy_squads": [
+    { "pos": [7,1], "job": "soldier", "level": 1, "ai": "aggressive",  "name": "Brigand" },
+    { "pos": [8,2], "job": "arcanist","level": 1, "ai": "ranged_hold", "name": "Rogue Mage" },
+    { "pos": [6,2], "job": "soldier", "level": 1, "ai": "aggressive",  "name": "Brigand" }
+  ],
+  "win_condition":  "defeat_all",
+  "lose_condition": "party_wiped",
+  "rewards": { "gil": 120, "exp": 80, "items": ["potion"] },
+  "intro_text": "A merchant convoy has been ambushed at the crossroads. Drive off the brigands."
+}
