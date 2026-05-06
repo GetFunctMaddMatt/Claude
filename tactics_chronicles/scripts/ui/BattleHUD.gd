@@ -41,11 +41,12 @@ func _connect_signals() -> void:
 	EventBus.tile_selected.connect(_on_tile_selected)
 
 func _on_turn_started(unit: Unit) -> void:
-	selected_unit = unit
+	selected_unit         = unit
+	end_turn_btn.visible  = unit.is_player
+	momentum_bar.visible  = unit.is_player
+	surge_btn.visible     = unit.is_player and battle_engine.turn_manager.has_surge(unit)
 	_refresh_unit_panel(unit)
 	_refresh_skill_menu(unit)
-	end_turn_btn.visible  = unit.is_player
-	surge_btn.visible     = unit.is_player and battle_engine.turn_manager.has_surge(unit)
 	_log("[color=yellow]%s's turn[/color]" % unit.unit_name)
 
 func _on_turn_ended(_unit: Unit) -> void:
@@ -147,7 +148,10 @@ func _on_surge_pressed() -> void:
 	EventBus.menu_opened.emit("surge")
 
 func _hide_menus() -> void:
-	skill_menu.visible = false
+	skill_menu.visible    = false
+	end_turn_btn.visible  = false
+	surge_btn.visible     = false
+	momentum_bar.visible  = false
 
 # -----------------------------------------------------------------------------
 # Action log

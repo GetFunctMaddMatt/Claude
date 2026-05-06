@@ -395,6 +395,7 @@ func _wire_subsystems() -> void:
 		grid_renderer.queue_redraw()
 	if camera and grid_renderer:
 		camera.set_grid_bounds(grid_renderer.total_size())
+		camera.snap_to(grid_renderer.total_size() * 0.5, false)
 	if hud:
 		hud.battle_engine = self
 	EventBus.turn_started.connect(func(u: Unit):
